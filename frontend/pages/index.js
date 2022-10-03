@@ -7,10 +7,14 @@ import styles from '../styles/Home.module.css'
 import Hero from '../public/components/hero'
 import Footer from '../public/components/footer'
 import PostProduct from './postProduct'
-import BiddingPage from './biddingPage'
-// import MyAcount from '../public/components/myAccount'
-import Login from './login'
+// import BiddingPage from './biddingPage'
+import Land from '../public/components/land'
+import Login from './dashboard/login'
 import Signup from './signup'
+import VehicleProperties from '../public/components/vehicleProperties'
+import Clothing from '../public/components/clothing'
+import Furniture from '../public/components/furniture'
+import Electronics from '../public/components/electronics'
 
 export default function Home() {
   return (
@@ -24,7 +28,12 @@ export default function Home() {
       <Main/>
       <Hero/>
       <Footer/>  
-   
+      <PostProduct/>
+   {/* <VehicleProperties/>
+   <Land/>
+   <Clothing/>
+   <Furniture/>
+   <Electronics/> */}
     </div>
   )
 }

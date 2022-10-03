@@ -20,9 +20,6 @@ console.log(err)
 const corsOption={
     origin:"*",
 }
-
-
-
 app.use(express.json());
 app.use(cors())
 app.use("/api/auth",authRoutes)

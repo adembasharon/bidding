@@ -1,4 +1,6 @@
+import Link from "next/link";
 import React from "react";
+import Partners from "./partners";
 
 const Hero=()=>{
     return(
@@ -66,7 +68,9 @@ const Hero=()=>{
         <p>7 Bidders</p>
     </div>
     <div>
+    <Link href="/biddingPage">
         <button>View Bid</button>
+        </Link>
     </div>
     </div>
 </div>
@@ -83,7 +87,9 @@ const Hero=()=>{
         <p>10 Bidders</p>
     </div>
     <div>
+    <Link href="/biddingPage">
         <button>View Bid</button>
+        </Link>
     </div>
     </div>
 </div>
@@ -100,7 +106,9 @@ const Hero=()=>{
         <p>9 Bidders</p>
     </div>
     <div>
+        <Link href="/biddingPage">
         <button>View Bid</button>
+        </Link>
     </div>
     </div>
 </div>
@@ -117,7 +125,9 @@ const Hero=()=>{
         <p>13 Bidders</p>
     </div>
     <div>
+    <Link href="/ongoingBid">
         <button>View Bid</button>
+        </Link>
     </div>
     </div>
 </div>
@@ -156,26 +166,7 @@ const Hero=()=>{
 
 
 
-
-<div className="hero_bank_container">
-    <h2>Our Partners</h2>
-            <div className="hero_banks">
-
-<div >
-    <img src="../images/cop.png" width={70}/>
-    
-</div>
-
-<div>
-    <img src="../images/equity.png" width={70}/>
-    
-</div>
-<div>
-    <img src="../images/garam.png" width={70}/>
-    
-</div>
-</div>
-            </div>
+<Partners/>
         </div>
     )
 }

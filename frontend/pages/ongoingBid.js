@@ -1,7 +1,18 @@
 import React from "react";
+import Footer from "../public/components/footer";
+import Nav from "../public/components/nav";
+import Partners from "../public/components/partners";
+import SubNav from "../public/components/subnav";
 
 const OngoingBid=()=>{
+
+
+
+    
     return(
+        <>
+        <Nav/>
+        <SubNav/>
         <div className="bid_main_container">
           
 <div className="bid_sub_main">
@@ -156,6 +167,10 @@ const OngoingBid=()=>{
 </div>
 
         </div>
+
+        <Partners/>
+        <Footer/>
+       </>
     )
 }
 export default OngoingBid

@@ -1,6 +1,7 @@
 import React from "react";
 import Footer from "../public/components/footer";
 import Nav from "../public/components/nav";
+import Partners from "../public/components/partners";
 import SubNav from "../public/components/subnav";
 const MyAcount=()=>{
     return(
@@ -18,6 +19,9 @@ const MyAcount=()=>{
                 </div>
                 </div>
                 <div className="myaccount_bal_container">
+                <div>
+                        <button>Go to Dashboard</button>
+                    </div>
                     <div>
                         <button>Add Balance</button>
                     </div>
@@ -91,6 +95,7 @@ const MyAcount=()=>{
             </div>
 
         </div>
+        <Partners/>
         <Footer/>
         </>
 

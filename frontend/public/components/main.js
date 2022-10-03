@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 const Main = () => {
   return (
     <div className="main_container">
@@ -14,10 +15,11 @@ const Main = () => {
         <div className="main_btn1">
           <button>Learn More</button>
         </div>
-
+        <Link href="/ongoingBid">
         <div className="main_btn2">
           <button>View Auction</button>
         </div>
+        </Link>
       </div>
       </div>
      

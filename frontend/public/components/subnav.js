@@ -22,7 +22,7 @@ const SubNav=()=>{
     <div className="subnav_login">
         <div  className="subnav_credentials">
         <div>
-           <Link href="/login" passHref><p>Login/</p></Link>
+           <Link href="/dashboard/login" passHref><p>Login/</p></Link>
             </div>
             <div>
            <Link href="/signup"><p>Register</p></Link>

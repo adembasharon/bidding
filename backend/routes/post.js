@@ -9,7 +9,10 @@ description:req.body.description,
 properties:req.body.properties,
 cartegory:req.body.cartegory,
 name:req.body.name,
-subimages:req.body.subimages
+subimages:req.body.subimages,
+currentdate:req.body.currentdate,
+endingdate:req.body.endingdate,
+startingPrice:req.body.startingPrice
 
 
 })
