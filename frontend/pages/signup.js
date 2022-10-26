@@ -4,7 +4,10 @@ import Nav from "../public/components/nav";
 import SubNav from "../public/components/subnav";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
+import ClearIcon from "@mui/icons-material/Clear";
 import Link from "next/link";
+
 const Signup = () => {
   const [details, setDetails] = useState({
     email: "",
@@ -17,16 +20,48 @@ const Signup = () => {
     password: "",
     email: "",
   });
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [user, setUser] = useState({
+    username: "",
+    password: ""
+})
 
+
+const validatePassword = () => {
+  if (confirmPassword !== "") {
+    return password === confirmPassword ? (
+      <CheckOutlinedIcon style={{ color: "green" }} />
+    ) : (
+      <ClearIcon style={{ color: "red" }} />
+    );
+  }
+
+  // if (confirmPassword !== "") {
+  //   return password === confirmPassword ?
+  //    (
+  //     <CheckOutlinedIcon style={{ color: "green" }} />,
+  //     <p style={{ color: "green" }}>Password is correct</p>
+  //   ) 
+  //   :
+  //    (
+  //     <ClearIcon style={{ color: "red" }}/>,
+  //     <p style={{ color: "red" }}>Password does not match</p>
+  //   );
+  // }
+};
 // const [password,setPassword]=useState("")
 // const [conPassword,setConpasswor]
 
+ useEffect(() => {
+      localStorage.setItem("user", JSON.stringify(user))
+  }, [user])
 
 
   const [showPass, setShowPass] = useState(false);
   const togglePassWardVisibility = () => {
     setShowPass(!showPass);
-  };
+  }; 
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -157,11 +192,14 @@ const Signup = () => {
                   </div>
                 </div>
               </div>
+              <div>
+                {validatePassword()}
+              </div>
               
             </div>
-            {/* <Link href={`/dashboard/login`}> */}
-            <button onClick={handleChange}>Signup</button>
-            {/* </Link> */}
+            <Link href={`/dashboard/login`}>
+            <button style={{marginBottom:"2em"}} onClick={handleChange}>Signup</button>
+            </Link>
           </div>
 
           <div className="signup_background_image signup_second_container">
@@ -170,6 +208,7 @@ const Signup = () => {
         </div>
       </div>
       <Footer />
+
     </>
   );
 };

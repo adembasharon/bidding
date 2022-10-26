@@ -9,14 +9,20 @@ const Nav=()=>{
                 <div>
                     <p>Find Us On:</p>
                 </div>
-                <div className="nav_icon">
+                <div className="nav_icon" style={{cursor:"pointer"}}>
+                    <Link href="https://twitter.com/Arona_crev">
                     <img src="../images/twitter.svg" width={13}/>
+                    </Link>
                 </div>
-                <div>
+                <div style={{cursor:"pointer"}}>
+                    <Link href="">
                     <img src="../images/insta.png" width={13}/>
+                    </Link>
                 </div>
-                <div>
+                <div style={{cursor:"pointer"}}>
+                    <Link href="https://web.facebook.com/profile.php?id=100078940822960">
                     <img src="../images/facebook.svg" width={7}/>
+                    </Link>
                 </div>
             </div>
 
@@ -26,8 +32,10 @@ const Nav=()=>{
                     <div>
                         <img src="../images/account.svg" width={12}/>
                     </div>
-                    <div>
+                    <div style={{cursor:"pointer"}}>
+                        <Link href="/admin/dashboard">
                        <p>My Account</p>
+                       </Link>
                     </div>
                 </div>
                     </Link>

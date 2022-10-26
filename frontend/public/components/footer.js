@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Footer=()=>{
@@ -12,19 +13,21 @@ const Footer=()=>{
     <h3>Need help?</h3>
     </div>
     <div>
-        <p>FAQ</p>
+        <Link href="/F.A.Q">
+        <p style={{cursor:"pointer"}}>FAQ</p>
+        </Link>
     </div>
+
     <div>
-        <p>Blog</p>
-    </div>
-    <div>
-        <p>Help and Feedback</p>
+        <Link href="/termsAndConditions">
+        <p style={{cursor:"pointer"}}>Help and Feedback</p>
+        </Link>
     </div>
 </div>
 
 <div className="footer_contact">
     <div>
-        <h2>Contact Us</h2>
+        <h3>Contact Us</h3>
     </div>
     <div>
         <p>0731066135  / 0712801538</p>

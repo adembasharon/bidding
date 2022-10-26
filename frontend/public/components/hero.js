@@ -1,14 +1,46 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState,useEffect, useContext } from "react";
+import axios from "axios"
 import Partners from "./partners";
+import { BidContext } from "../../state";
 
 const Hero=()=>{
+
+    const biddingContext = useContext(BidContext)
+    const {posts} = biddingContext
+    const [post, setPost] = posts
+    console.log(post)
+
+    const url = ' http://localhost:5000/api/post/'
+    const options={
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    }
+
+    useEffect(() => {
+        axios.get(url,options)
+            .then((res) => {
+                setPost(res.data)
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+
+    }, [url])
+
+
     return(
         <div className="hero_container">
+
+
+
+            <div>
+            
             <div>
 <div className="hero_heading1">
     <h2>Popular Cartegories</h2>
 </div>
+
 <div className="hero_items">
 <div className="hero_sinle_item">
     <div>
@@ -49,90 +81,35 @@ const Hero=()=>{
 
 </div>
 
-            </div>
+    </div>
 
             <div>
 <div className="hero_bid_heading">
     <h2>Ongoing Bids</h2>
 </div>
 <div className="hero_Biding">
+{post.map(item => (
 <div className="hero_sinle_item">
     <div>
-    <img src="../images/desktop.png" width={150}/>
+    <img src={item.image} width={200}/>
     </div>
     <div>
         <div>
-    <p>Desktop</p>
+    <p>{item.name}</p>
     </div>
     <div className="hero_bidders_font">
         <p>7 Bidders</p>
     </div>
     <div>
-    <Link href="/biddingPage">
+    <Link href={`/bids/${item._id}`}>
         <button>View Bid</button>
         </Link>
     </div>
     </div>
 </div>
-
-<div className="hero_sinle_item">
-    <div>
-    <img src="../images/table1.png" width={150}/>
-    </div>
-    <div>
-        <div>
-    <p>Table</p>
-    </div>
-    <div className="hero_bidders_font">
-        <p>10 Bidders</p>
-    </div>
-    <div>
-    <Link href="/biddingPage">
-        <button>View Bid</button>
-        </Link>
-    </div>
-    </div>
-</div>
-
-<div className="hero_sinle_item">
-    <div>
-    <img src="../images/newcar.png" width={230}/>
-    </div>
-    <div>
-        <div>
-    <p>Vihicle</p>
-    </div>
-    <div className="hero_bidders_font">
-        <p>9 Bidders</p>
-    </div>
-    <div>
-        <Link href="/biddingPage">
-        <button>View Bid</button>
-        </Link>
-    </div>
-    </div>
-</div>
-
-<div className="hero_sinle_item">
-    <div>
-    <img src="../images/home.png" width={150}/>
-    </div>
-    <div>
-        <div>
-    <p>House</p>
-    </div>
-    <div className="hero_bidders_font">
-        <p>13 Bidders</p>
-    </div>
-    <div>
-    <Link href="/ongoingBid">
-        <button>View Bid</button>
-        </Link>
-    </div>
-    </div>
-</div>
-</div>
-            </div>
+ ))} 
+             </div>
+             </div>
  <div className="hero_service_container">
     <h2>Objectives</h2>
 <div className="hero_service_icon">
@@ -140,9 +117,7 @@ const Hero=()=>{
     <div>
         <img src="../images/clock.png" width={200}/>
         </div>
-            
-
-    </div>
+            </div>
     <div>
         <div>
 
@@ -162,10 +137,9 @@ const Hero=()=>{
 
 </div>
 
+</div>
+
 </div> 
-
-
-
 <Partners/>
         </div>
     )

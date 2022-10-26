@@ -3,25 +3,22 @@ const Clothing = () => {
   return (
     <div>
       <div className="land_container">
-        <div className="land_textarea">
-          <div>
-            <h4>Description</h4>
-          </div>
-          <div>
-            <textarea width={400} />
-          </div>
-        </div>
+        <div className="clothing_textarea"  >
+        <div>
+  <h6>Size</h6>
+</div>
         <div>
           <select>
-            <option>Size</option>
             <option>Small</option>
             <opion>Large</opion>
             <option>Medium</option>
+            <option>x-Large</option>
+            <option>x-Small</option>
+            <option>xx-Large</option>
+            <option>xx-Small</option>
+
           </select>
         </div>
-
-        <div>
-          <input type="text" placeholder="Upload image" />
         </div>
       </div>
     </div>

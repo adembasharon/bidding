@@ -3,7 +3,10 @@ import Footer from "../public/components/footer";
 import Nav from "../public/components/nav";
 import Partners from "../public/components/partners";
 import SubNav from "../public/components/subnav";
+import Link from "next/link";
 const MyAcount=()=>{
+
+    
     return(
         <>
         <Nav/>
@@ -15,12 +18,15 @@ const MyAcount=()=>{
                     <p>My Bids</p>
                 </div>
                 <div className="myaccount_post_cont1">
+
                     <p>My Posts</p>
                 </div>
                 </div>
                 <div className="myaccount_bal_container">
                 <div>
+                    <Link href="/admin/dashboard">
                         <button>Go to Dashboard</button>
+                        </Link>
                     </div>
                     <div>
                         <button>Add Balance</button>

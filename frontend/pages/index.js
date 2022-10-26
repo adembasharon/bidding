@@ -6,10 +6,10 @@ import OngoingBid from './ongoingBid'
 import styles from '../styles/Home.module.css'
 import Hero from '../public/components/hero'
 import Footer from '../public/components/footer'
-import PostProduct from './postProduct'
+// import PostProduct from './admin/postProduct'
 // import BiddingPage from './biddingPage'
 import Land from '../public/components/land'
-import Login from './dashboard/login'
+import Login from './admin/login'
 import Signup from './signup'
 import VehicleProperties from '../public/components/vehicleProperties'
 import Clothing from '../public/components/clothing'
@@ -23,12 +23,15 @@ export default function Home() {
         <title>Create Next App</title>
         <link href="https://fonts.googleapis.com/css2?family=Edu+TAS+Beginner&family=Merriweather:wght@300&display=swap" rel="stylesheet"/>
               </Head> 
+              
                <Nav/> 
       <SubNav/>
       <Main/>
       <Hero/>
-      <Footer/>  
-      <PostProduct/>
+      <Footer/> 
+          <VehicleProperties/>
+ 
+      {/* <PostProduct/> */}
    {/* <VehicleProperties/>
    <Land/>
    <Clothing/>

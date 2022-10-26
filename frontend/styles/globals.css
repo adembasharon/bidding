@@ -18,6 +18,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
 .validation_error{
   color: red;
 }
@@ -28,7 +29,9 @@ a {
   font-family:  Edu TAS Beginner;
   color: rgb(75, 75, 10);
 }
-
+button{
+  cursor: pointer;
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
@@ -180,6 +183,7 @@ height: 80vh;
 .hero_container{
 width: 80%;
 margin: 0 auto;
+
 }
 .hero_heading1{
   text-align: center;
@@ -191,7 +195,7 @@ margin: 0 auto;
   justify-content: space-between;
   width: 80%;
   margin: 0 auto;
-  
+  flex-wrap: wrap;
 }
 .hero_sinle_item{
   display: flex;
@@ -208,6 +212,7 @@ margin: 0 auto;
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: .8em;
   flex-wrap: wrap;
   width: 80%;
   margin: 0 auto;
@@ -278,7 +283,11 @@ margin: 0 auto;
   margin: 0 auto;
 }
 
-
+.inputbtn{
+  outline: none;
+  border: 1px solid blue;
+  border-radius: 4px;
+}
 .bid_image{
   display: flex;
   align-items: center;
@@ -378,28 +387,31 @@ margin: 0 auto;
   background-size: cover;
   background-repeat: no-repeat;
 background-position: center center;
-height: 80vh
+height: 100%;
 }
 .postproduct_input{
   display: flex;
   align-items: center;
-    padding: 0 15em;
-  gap: 2em;
+  flex-direction: column;
+    /* padding: 0 15em; */
+  /* gap: 2em; */
   
   
 }
 .postproduct_input input {
-  width:100%;
+  width:70%;
   outline: none;
   
 }
 .postproduct_input_label{
-  /* flex: 1; */
   width: 50%;
 }
 .postproduct_input_label_item{
-  /* flex: 1; */
   width: 50%;
+}
+.postproduct_input_label_item1{
+  width: 70%;
+
 }
 .postproduct_form_container{
  
@@ -414,7 +426,12 @@ height: 80vh
   text-align: center;
   color: #0f78f0;
 }
-
+.singlePost :hover{
+width: 100px;
+transition: width 2s, height 4s;
+border: 1px solid #0f78f0;
+border-radius: 4px;
+}
 
 
 /* LOGIN */
@@ -430,12 +447,9 @@ height: 80vh
   gap: 2em;
   }
 .login_second_container{
-  /* flex: 1; */
 margin-top: 1em;
 }
-.login_first_container{
-  /* flex: 1; */
-}
+
 .login_google{
   display: flex;
   align-items: center;
@@ -443,6 +457,7 @@ margin-top: 1em;
   background-color: #0f78f0;
   color: white;
   width: 100%;
+  cursor: pointer;
   }
 .login_bid_icon{
   display: flex;
@@ -494,9 +509,7 @@ margin-top: 1em;
   /* flex: 1; */
 margin-top: 1em;
 }
-.signup_first_container{
-  /* flex: 1; */
-}
+
 .signup_google{
   display: flex;
   align-items: center;
@@ -665,7 +678,6 @@ margin: 0 auto;
   align-items: center;
   justify-content: space-around;
   flex-direction: row;
-  /* gap: 3em; */
   margin: 1em 0;
   background-color: rgb(211, 208, 208);
 }
@@ -760,4 +772,277 @@ text-align: center;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+/* clothing */
+.clothing_container{
+  background-color: #97beeb;
+  padding: .3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: .3em;
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* DASHBOARD */
+.dashboard_container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  margin: 0 auto;
+  gap: 1em;
+  
+}
+
+.dashboard_container p{
+  width: 60%;
+}
+
+.dashboard_items p span{
+  color: green;
+  font-family:  Edu TAS Beginner;
+}
+.dashboard_container button{
+  background-color: #0f78f0;
+  color: white;
+  padding: .7em 1em;
+  border: none;
+  border-radius: 4px; 
+}
+.dashboard_firstButton{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 3em;
+}
+.dashboard_firstButton button{
+  background-color: #0f78f0;
+  color: white;
+  padding: .7em 1em;
+  border: none;
+  border-radius: 4px; 
+  margin: .7em 0;
+}
+.dashboard_clickButton{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1em;
+  margin: .7em 0;
+}
+/* FAQ */
+.faq_main_items{
+  width: 80%;
+  margin: 0 auto;
+}
+.faq_main_items h4{
+  color: green;
+
+}
+.Terms_main_cont{
+  width: 80%;
+  margin: 0 auto;
+}
+.Terms_main_cont h4 {
+  color: green;
+}
+/* EDIT PAGE */
+.edit_container{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  margin:auto;
+margin-top: 3em;
+}
+.edit_container input{
+  padding: .7em 0;
+  outline: none;
+  border: 1px solid grey;
+  border-radius: 4px;
+  margin-top: .7em;
+}
+.edit_container button{
+  background-color: #0f78f0;
+  color: white;
+  padding: .7em 1em;
+  border: none;
+  border-radius: 4px; 
+  margin: .7em 0;
+}
+.edit_btn{
+  display: flex;
+  align-items: center;
+  gap: .3em;
+  flex-direction: row;
+}
+
+/* MEDIA QUERIES */
+@media (max-width:768px), (max-width:414px),(max-width:816px) {
+/* NAV */
+  .nav_social_icons{
+  gap: .3em;
+}
+/* SUBNAV */
+.subnav_container img{
+  width: 50px;
+  margin-top: .7em;
+}
+.subnav_container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1em;
+}
+.subNav_input {
+display: none;
+}
+.subNav_list_item{
+  font-size: .7rem;
+  gap: .9em;
+}
+/* MAIN */
+.main_haeding h1{
+  font-size: 2rem;
+}
+/* HERO */
+.hero_items{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero_Biding{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero_service_icon{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .8em;
+}
+/* PARTNERS */
+.hero_banks{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .8em;
+}
+/* FOOTER */
+.footer_main_container p{
+  font-size: .6rem;
+}
+.footer_main_container h3{
+  font-size: .8rem;
+}
+.footer_main_container img{
+display: none;
+}
+.footer_main_container{
+  display: flex;
+  justify-content: space-between;
+}
+.footer_help_links{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+/* MYACCOUNT */
+.myaccount_bal_container button{
+  display: flex;
+font-size: .7rem;
+}
+.myaccount_bal_container p{
+  font-size: .7rem;
+}
+/* DASHBOARD */
+.dashboard_container{
+  display:flex;
+  flex-direction: column;
+  justify-content: center ;
+}
+/* LOGIN */
+.login_background_image{
+  display: none;
+}
+.signup_background_image{
+  display: none;
+}
+.biddingpage_main_container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.biddingpage_container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.biddingpage_price_of_items_container h2{
+  font-size: .8rem;
+  width: 100%;
+} 
+.biddingpage_price_of_items_container input{
+  width: 90%;
+}
+.biddingpage_vehicle_properties{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+  padding: .7em;
+  font-size: .7rem;
+}
+.biddingpage_wathed_details_container{
+  width: 100%;
+}
+.biddingpage_price_of_items p{
+  font-size: .9rem;
+}
+.biddingpage_price_of_items{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .3em;
+  width: 100%;
+}
+.inputbtn{
+  width: 100%;
+}
+.imgBid img{
+width: 200px;
+}
+/* POST */
+.postProduct_background_image img{
+   width: 100%;
+  height: 100vh; 
+  /* display: none; */
+}
+.postProduct_background_image p{
+  font-size: .6rem;
+  padding: 0 auto;
+
+}
+.postproduct_input{
+  margin: 0 auto;
+  padding: 0 auto;
+}
+.postProduct_background_image{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 auto;
+}
 }
