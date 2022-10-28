@@ -6,9 +6,10 @@ import Footer from "../../public/components/footer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import GoogleProvider from "next-auth/providers/google";
+import { getAuth, getRedirectResult, GoogleAuthProvider } from "firebase/auth";
+import { FirebaseApp } from "../../../firebase";
+
 const Login = () => {
-  
- 
 
   const [user, setUser] = useState({
       username: "",
@@ -16,8 +17,6 @@ const Login = () => {
   })
 
  const [currentUser,setCurrentUser]=useState("")
-
-
   const [loginMessage, setLoginMessage] = useState("")
   const [validationMessage, setValidationMessage] = useState({
       username: "",
@@ -28,17 +27,11 @@ const Login = () => {
       password: false
 
   })
- 
-
   const router = useRouter();
-
-
-
   const [showPass, setShowPass] = useState(false);
   const togglePassWardVisibility = () => {
     setShowPass(!showPass);
   };
-
   const handleSubmit = async e => {
       e.preventDefault()
       try {
@@ -54,7 +47,7 @@ const Login = () => {
               setValidationMessage({ ...validationMessage, password: "Password is required" })
           }
           else {
-              const data = await fetch("http://localhost:5000/api/auth/login", {
+              const data = await fetch("https://biddingbackend.onrender.com/api/auth/login", {
                   method: "POST",
       
                   body: JSON.stringify(user),
@@ -62,9 +55,7 @@ const Login = () => {
                       "content-type": "application/json",
                       "accept": "application/json"
                   }
-              }
-
-              
+              }        
               )
               console.log(data)
 
@@ -99,27 +90,28 @@ const Login = () => {
   }, [user])
 
   
-const googleLogin=()=>{
-  const options = {
-    providers: [
-       GoogleProvider({
-         clientId: process.env.GOOGLE_ID,
-         clientSecret: process.env.GOOGLE_SECRET,
-         authorization: "https://accounts.google.com/o/oauth2/v2/auth?prompt=consent&access_type=offline&response_type=code"
-       })
-     ],
-      callbacks: {
-     async signIn({ account, profile }) {
-       if (account.provider === "google") {
-         return profile.email_verified && profile.email.endsWith("localhost:3000")
-       }
-       return true 
-     },
-   }
-    }
-    
-   
-  }
+  const auth = getAuth(app);
+// const googleLogin=()=>{  
+
+  getRedirectResult(auth)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access Google APIs.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+  
+      // The signed-in user info.
+      const user = result.user;
+    }).catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+     
+})
+// }
 
   return (
     <>
@@ -145,7 +137,7 @@ const googleLogin=()=>{
             </div>
           </div>
 
-          <div className="login_google"  onClick={googleLogin}>
+          <div className="login_google"  onClick={auth}>
             <div>
               <img src="../images/google.png" width={27} />
             </div>

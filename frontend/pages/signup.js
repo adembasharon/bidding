@@ -88,7 +88,7 @@ const validatePassword = () => {
         body: JSON.stringify(details),
       };
 
-      fetch("http://localhost:5000/api/auth/register", options)
+      fetch("https://biddingbackend.onrender.com/api/auth/register", options)
         .then((res) => res.json())
         .then((data) => {
           if (data.code === 11000) {

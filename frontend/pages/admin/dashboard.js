@@ -49,7 +49,7 @@ const Dashboard=()=>{
 //     console.log(err)
 // })
 
-    const url = 'http://localhost:5000/api/post/'
+    const url = 'https://biddingbackend.onrender.com/api/post/'
     useEffect(() => {
         getPosts()
     }, [])
@@ -74,7 +74,7 @@ const Dashboard=()=>{
         setPost([...data]);
         localStorage.setItem("post", JSON.stringify(post))
 
-        const deletedItem = await fetch(`http://localhost:5000/api/post/${id}`, {
+        const deletedItem = await fetch(`https://biddingbackend.onrender.com/api/post/${id}`, {
             method: "DELETE",
             headers: {
                 "token": `Bearer ${currentUser[0].accessToken}`

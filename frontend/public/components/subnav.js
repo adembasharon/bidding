@@ -15,7 +15,7 @@ const [query,setQuery]=useState("")
 const [active,setActive]=useState(false)
 const [results,setResults]=useState([])
 
-const searchEndPoint=(query)=>`http://localhost:5000/api/post/${query}`
+const searchEndPoint=(query)=>`https://biddingbackend.onrender.com/api/post/${query}`
 
 const onChange=useCallback((e)=>{
     const query=e.target.value;

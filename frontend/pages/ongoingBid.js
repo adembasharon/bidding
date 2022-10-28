@@ -46,7 +46,7 @@ const OngoingBid=()=>{
 
 
     useEffect(()=>{
-        const url=  "http://localhost:5000/api/post/"
+        const url=  "https://biddingbackend.onrender.com/api/post/"
         const options={
     
             headers: {

@@ -70,7 +70,7 @@ const PostProduct = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     console.log(formInput);
-    const url = " http://localhost:5000/api/post/new";
+    const url = " https://biddingbackend.onrender.com/api/post/new";
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },

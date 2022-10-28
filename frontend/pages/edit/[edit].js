@@ -22,7 +22,7 @@ const Edit =()=>{
     const bid = router.query.edit;
 
     useEffect(()=>{
-        const url=  "http://localhost:5000/api/post/"
+        const url=  "https://biddingbackend.onrender.com/api/post/"
         const options={
 
             headers: {
@@ -137,7 +137,7 @@ post.filter(item=>{
         const handleUpdate = async (currentId) =>{
             if(currentPost.name !== updatedPost.name || currentPost.cartegory !== updatedPost.cartegory || currentPost.description !== updatedPost.description || currentPost.image !== updatedPost.image || currentPost.subimages !== updatedPost.subimages|| currentPost.currentdate!== updatedPost.currentdate||currentPost.endingdate!==updatedPost.endingdate||currentPost.startingPrice!==updatedPost.startingPrice){
                 
-                const updatePosts = await fetch(`http://localhost:5000/api/post/${currentId}`, {
+                const updatePosts = await fetch(`https://biddingbackend.onrender.com/api/post/${currentId}`, {
                     method: "PUT",
                     headers: {
                         'Content-type': 'application/json',
@@ -156,7 +156,7 @@ post.filter(item=>{
             }
          
     }
-    const url = ' http://localhost:5000/api/post/'
+    const url = 'https://biddingbackend.onrender.com/api/post/'
     const options={
         method: "GET",
         headers: { "Content-Type": "application/json" },

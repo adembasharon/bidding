@@ -11,7 +11,7 @@ const Hero=()=>{
     const [post, setPost] = posts
     console.log(post)
 
-    const url = ' http://localhost:5000/api/post/'
+    const url = ' https://biddingbackend.onrender.com/api/post/'
     const options={
         method: "GET",
         headers: { "Content-Type": "application/json" },
