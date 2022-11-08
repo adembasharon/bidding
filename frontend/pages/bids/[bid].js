@@ -246,6 +246,7 @@ return <img src={src} width={30} />
               </div>
             </div>
           </div>
+
         </div>
         <div className="bidingpage_propery_heading">
           <h2>Properties</h2>

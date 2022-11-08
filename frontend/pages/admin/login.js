@@ -5,9 +5,9 @@ import SubNav from "../../public/components/subnav";
 import Footer from "../../public/components/footer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import GoogleProvider from "next-auth/providers/google";
-import { getAuth, getRedirectResult, GoogleAuthProvider } from "firebase/auth";
-import { FirebaseApp } from "../../../firebase";
+// import GoogleProvider from "next-auth/providers/google";
+// import { getAuth, getRedirectResult, GoogleAuthProvider } from "firebase/auth";
+// import { FirebaseApp } from "../../../firebase";
 
 const Login = () => {
 
@@ -90,28 +90,28 @@ const Login = () => {
   }, [user])
 
   
-  const auth = getAuth(app);
-// const googleLogin=()=>{  
+//   const auth = getAuth(app);
+// // const googleLogin=()=>{  
 
-  getRedirectResult(auth)
-    .then((result) => {
-      // This gives you a Google Access Token. You can use it to access Google APIs.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
+//   getRedirectResult(auth)
+//     .then((result) => {
+//       // This gives you a Google Access Token. You can use it to access Google APIs.
+//       const credential = GoogleAuthProvider.credentialFromResult(result);
+//       const token = credential.accessToken;
   
-      // The signed-in user info.
-      const user = result.user;
-    }).catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
+//       // The signed-in user info.
+//       const user = result.user;
+//     }).catch((error) => {
+//       // Handle Errors here.
+//       const errorCode = error.code;
+//       const errorMessage = error.message;
+//       // The email of the user's account used.
+//       const email = error.customData.email;
+//       // The AuthCredential type that was used.
+//       const credential = GoogleAuthProvider.credentialFromError(error);
      
-})
-// }
+// })
+// // }
 
   return (
     <>
@@ -137,7 +137,7 @@ const Login = () => {
             </div>
           </div>
 
-          <div className="login_google"  onClick={auth}>
+          <div className="login_google" >
             <div>
               <img src="../images/google.png" width={27} />
             </div>

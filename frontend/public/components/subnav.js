@@ -1,61 +1,39 @@
-import React, { useEffect, useState ,useContext, useRef, useCallback} from "react"
+import React, { useEffect, useState,useContext} from "react"
 import Link from "next/link"
+import algoliasearch from 'algoliasearch';
 import { BidContext } from "../../state"
-
-const SubNav=()=>{
-
-    const [reload,setReload]=useState()
+import { InstantSearch, SearchBox, Hits }from "react-instantsearch-dom";
+    const SubNav=()=>{
     const biddingContext = useContext(BidContext);
     const { posts } = biddingContext;
     const [post, setPost] = posts;
 
 
-const searchRef=useRef(null)
-const [query,setQuery]=useState("")
-const [active,setActive]=useState(false)
-const [results,setResults]=useState([])
 
-const searchEndPoint=(query)=>`https://biddingbackend.onrender.com/api/post/${query}`
-
-const onChange=useCallback((e)=>{
-    const query=e.target.value;
-    setQuery(query)
-    if(query.length){
-        fetch(searchEndPoint(query))
-        .then((res)=>res.json())
-        .then((res)=>{
-            setResults(res.results)
-        })
-    }else{
-        setResults([])
-    }
-},[])
-
-const onFocus=()=>{
-    setActive(true)
-    window.addEventListener("click",onclick)
-}
-const onclick=useCallback((e)=>{
-    if(searchRef.current && !searchRef.current.contains(e.target.value)){
-        setActive(false)
-        setQuery("")
-        setResults([])
-        window.addEventListener("click",onclick)
-
-    }
-},[])
-
-
-
-// useEffect(()=>{
-// setPost(
-// items.filter(item=>
-//     item.name.toLowerCase().includes(search.toLowerCase)
+// const searchClient=algoliasearch(
+//     "bb4630731dbfca3e69b9451792297933",
+//     "663405f6df386091a9c13ddfae6c213e",
 // )
-// ),[search,items]})
-// if(loading){
-//     return<div>Loading ...</div>
-// }
+
+
+    const searchClient=()=>{
+    const client = algoliasearch('bb4630731dbfca3e69b9451792297933', '663405f6df386091a9c13ddfae6c213e');
+    const index = client.initIndex('dev_bid');
+    
+    // Search for "query string" in the index "contacts"
+    index.search('query string').then(({ hits }) => {
+      console.log(hits);
+    });
+    
+    // Perform the same search, but only retrieve 50 results
+    // Return only the attributes "firstname" and "lastname"
+    index.search('query string', {
+      attributesToRetrieve: ['title', 'name','description'],
+      hitsPerPage: 50,
+    }).then(({ hits }) => {
+      console.log(hits);
+    });
+}
     return(
         <>
         
@@ -74,15 +52,17 @@ const onclick=useCallback((e)=>{
             <img src="../images/search.svg" width={15}/>
         </div>
         <div>
-        <input type="text" placeholder="Search for a product"
-        onChange={onChange}
-        onFocus={onFocus}
-        value={query}
-        // onChange={(e)=>setSearch(e.target.value)}
-        />
-        {active && results.length> 0 &&(
-            <p>next</p>
-        )}
+        <input type="text" placeholder=""   
+            //    onChange={filterData}      
+        />  
+        {/* <Hits /> */}
+
+ <InstantSearch 
+        searchClient={searchClient} 
+        indexName="dev_bid">  
+        <SearchBox />  
+        <Hits />
+      </InstantSearch> 
         </div>
     </div>
     <div className="subnav_login">
