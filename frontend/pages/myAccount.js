@@ -4,6 +4,7 @@ import Nav from "../public/components/nav";
 import Partners from "../public/components/partners";
 import SubNav from "../public/components/subnav";
 import Link from "next/link";
+import axios from "axios"
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.css';
 const MyAcount = () => {
@@ -12,25 +13,23 @@ const MyAcount = () => {
     amount:""
   })
   
-  const mpesaFunction=()=>{
-const url= "https://biddingbackend.onrender.com/api/stk/push"
-const options={
+  const mpesaFunction=async()=>{
+    try{
+const response= await fetch("https://biddingbackend.onrender.com/api/stk/push",{
   method:"POST",
-  headers:{"Content-Type":"application/json"},
-  body:JSON.stringify(mpesa)
-}
- fetch(url,options)
- .then(res=>setMpesa(res))
-
-  }
-  
-  useEffect(()=>{
+  headers:{
+    "Content-Type":"application/json"
+  },
+  body: JSON.stringify(mpesa)
+})
+console.log(response)
+    }catch(err){
+      console.log(err)
+    }
+} 
+    useEffect(()=>{
     import("bootstrap/dist/js/bootstrap");
   },[])
-
-
-
-
 
   return (
     
@@ -58,11 +57,11 @@ const options={
               </Link>
             </div>
 
-            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">
   Add balance
 </button>
 
-<div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div className="modal-dialog">
     <div className="modal-content">
       <div className="modal-header">
@@ -71,12 +70,12 @@ const options={
       </div>
       <div className="modal-body">
       <input type="" placeholder="Amount" style={{marginBottom:"1em"}}
-      onChange={(e)=> setMpesa({phone:e.target.value})}
-      
+      onChange={(e) => setMpesa(prev=>({...prev, amount:e.target.value }))}
       />
 
+
         <input type="" placeholder="Your phone number"
-              onChange={(e)=> setMpesa({amount:e.target.value})}
+      onChange={(e) => setMpesa(prev=>({ ...prev, phone: e.target.value }))}
 
         />
 

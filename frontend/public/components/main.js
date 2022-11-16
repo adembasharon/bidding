@@ -19,7 +19,7 @@ const Main = () => {
         </div>
         <Link href="/ongoingBid">
         <div className="main_btn2">
-          <button>View Auction</button>
+          <button>View Auctions</button>
         </div>
         </Link>
       </div>

@@ -194,14 +194,15 @@ return(
              </div>
                          </div>
                          <div>
-                         <input type="file"  onChange={(e) => imagesUpload(e)} />
+                         <input type="file"  onChange={(e) => imagesUpload(e)} multiple />
                          <div>
 
-                         {/* {
+                         {
+                            currentPost &&
                     currentPost.subimages.map(src=>{
-return <img  src={updatedPost.subimages ? updatedPost.subimages : currentPost.subimages}width={30} />
+return <img  src={src} width={30} />
                     })
-                } */}
+                }
                          </div>
                          </div>
 

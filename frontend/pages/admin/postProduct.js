@@ -21,6 +21,8 @@ const PostProduct = () => {
     startingPrice: "",
   });
   const [imgs, setImgs] = useState([]);
+  const [message,setMessage]=useState("")
+  const [exist,setExist]=useState("")
   const imagesUpload = async (e) => {
     const filesArr = Array.from(e.target.files);
 
@@ -37,12 +39,13 @@ const PostProduct = () => {
         })
           .then((res) => res.json())
           .then((data) => {
+       
             console.log(data);
             console.log(data.secure_url);
             return setFormInput((prev) => ({
               ...prev,
               subimages: [...prev.subimages, data.secure_url],
-            }));
+            }));            
           });
       } catch (err) {
         console.log(err);
@@ -55,11 +58,11 @@ const PostProduct = () => {
       return <Land />;
     } else if (formInput.cartegory === "Clothing") {
       return <Clothing />;
-    } else if (formInput.cartegory == "Vehicle") {
+    } else if (formInput.cartegory === "Vehicle") {
       return <Vehicle/>;
-    } else if (formInput.cartegory == "Electronics") {
+    } else if (formInput.cartegory === "Electronics") {
       return <Electronics />;
-    } else if (formInput.cartegory == "Furniture") {
+    } else if (formInput.cartegory === "Furniture") {
       return <Furniture />;
     } else {
       return null;
@@ -70,25 +73,35 @@ const PostProduct = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     console.log(formInput);
-    const url = " https://biddingbackend.onrender.com/api/post/new";
+
+    try{ 
+      const url = " https://biddingbackend.onrender.com/api/post/new";
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formInput),
     };
+    
     console.log(formInput);
 
     return fetch(url, options)
       .then((res) => res.json())
       .then((data) => {
         if (data.code === 11000) {
-          console.log("post added sucessfully");
-        } else {
+    return setExist("Product Exist")
+            console.log(err)
+          } else {
           console.log(data);
+          setMessage("Post added successfully")
           return data;
         }
-      });
+      });}
+      catch (err) {
+        console.log(err);
+      }
+      
   };
+
   const uploadImage = async (e) => {
     const files = e.target.files;
     const data = new FormData();
@@ -156,7 +169,7 @@ const PostProduct = () => {
       <div className="postproduct_main_container">
         <div className="postProduct_background_image">
           <form className="postproduct_form_container">
-            <h1>Post a Product</h1>
+            <h1>Post a Product</h1>     
             <div className="postproduct_input">
               <div className="postproduct_input_label">
                 <p>Name</p>
@@ -291,7 +304,10 @@ const PostProduct = () => {
               </div>
               </div>
             </div>
-
+            <div>
+  <p style={{textAlign:'center' , color:"green"}}>{exist}</p>
+  <p style={{textAlign:'center' , color:"green"}}>{message}</p>
+</div>
             <div className="postproduct_btn">
               <button onClick={(e) => submitForm(e)}>Post</button>
             </div>

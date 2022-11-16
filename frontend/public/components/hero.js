@@ -11,7 +11,8 @@ const Hero=()=>{
     const [post, setPost] = posts
     console.log(post)
 
-    const url = ' https://biddingbackend.onrender.com/api/post/'
+    try{
+        const url = ' https://biddingbackend.onrender.com/api/post/'
     const options={
         method: "GET",
         headers: { "Content-Type": "application/json" },
@@ -27,6 +28,9 @@ const Hero=()=>{
             })
 
     }, [url])
+}catch(err){
+        console.log(err)
+    }
 
 
     return(

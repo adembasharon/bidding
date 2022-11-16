@@ -46,6 +46,7 @@ const OngoingBid=()=>{
 
 
     useEffect(()=>{
+        try{
         const url=  "https://biddingbackend.onrender.com/api/post/"
         const options={
     
@@ -55,7 +56,9 @@ const OngoingBid=()=>{
         }
         axios.get(url,options)
         .then(res=>setPost(res.data))
-        
+    } catch(err){
+        console.log(err)
+    }
     
     },[])    
     return(

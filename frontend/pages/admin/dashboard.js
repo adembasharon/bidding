@@ -30,21 +30,21 @@ const Dashboard=()=>{
 
 
     const router = useRouter();
-    useEffect(() => {
+    // useEffect(() => {
 
-        const user = localStorage.getItem("loggedInUser")
+    //     const user = localStorage.getItem("loggedInUser")
 
-        setCurrentUser(JSON.parse(user))
+    //     setCurrentUser(JSON.parse(user))
 
-        if (JSON.parse(user)[0] ) {
-            router.push("/admin/dashboard")
-        } else {
-            router.push("/admin/login")
+    //     if (JSON.parse(user)[0] ) {
+    //         router.push("/admin/dashboard")
+    //     } else {
+    //         router.push("/admin/login")
 
-        }
+    //     }
 
-        console.log(user)
-    }, [])
+    //     console.log(user)
+    // }, [])
 // .catch((err)=>{
 //     console.log(err)
 // })
@@ -67,7 +67,7 @@ const Dashboard=()=>{
     }, [post])
 
     const detail = async (id) => {
-        // e.preventDefault();
+        try{
         const data = JSON.parse(localStorage.getItem("post"));
         const dataId = data.indexOf(data.find(item => item._id === id))
         data.splice(dataId, 1);
@@ -83,9 +83,9 @@ const Dashboard=()=>{
      
         console.log(await deletedItem.json())
         console.log(currentUser[0].accessToken)
-        .catch((err) => {
+    }catch(err){
             console.log(err)
-        })
+        }
     }
 
 

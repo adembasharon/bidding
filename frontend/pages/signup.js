@@ -35,23 +35,7 @@ const validatePassword = () => {
     ) : (
       <ClearIcon style={{ color: "red" }} />
     );
-  }
-
-  // if (confirmPassword !== "") {
-  //   return password === confirmPassword ?
-  //    (
-  //     <CheckOutlinedIcon style={{ color: "green" }} />,
-  //     <p style={{ color: "green" }}>Password is correct</p>
-  //   ) 
-  //   :
-  //    (
-  //     <ClearIcon style={{ color: "red" }}/>,
-  //     <p style={{ color: "red" }}>Password does not match</p>
-  //   );
-  // }
-};
-// const [password,setPassword]=useState("")
-// const [conPassword,setConpasswor]
+  }}
 
  useEffect(() => {
       localStorage.setItem("user", JSON.stringify(user))
@@ -65,7 +49,7 @@ const validatePassword = () => {
 
   const handleChange = (e) => {
     e.preventDefault();
-
+try{
     if (details.username == "") {
       setValidationMessage({
         ...validationMessage,
@@ -102,6 +86,8 @@ const validatePassword = () => {
           console.log(error);
         });
       console.log(details);
+    }}catch(err){
+      console.log(err)
     }
 
     console.log(validationMessage);
