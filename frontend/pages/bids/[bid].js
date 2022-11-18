@@ -7,6 +7,7 @@ import Partners from "../../public/components/partners";
 import Footer from "../../public/components/footer";
 import axios from "axios";
 import { IndeterminateCheckBox } from "@mui/icons-material";
+import { async } from "@firebase/util";
 
 const Post = () => {
   const [reload, setReload] = useState();
@@ -15,14 +16,16 @@ const Post = () => {
   const [post, setPost] = posts;
   const [timer, setTimer] = useState({});
   const [message, setMessage] = useState("");
-  const [amountInput, setAmountInput] = useState({
-    amount: "",
-  });
-  console.log(amountInput.amount);
+  const [user,setUser]=useState()
+  const [amountInput, setAmountInput] = useState(null);
+const [singlePost,setSinglePost]=useState(null)
 
   useEffect(() => {
     post.map((item) => {
+
+
       if (item._id == bid) {
+        setSinglePost(item)
         setInterval(() => {
           const startingDate = new Date(item.currentdate);
           const endingDate = new Date(item.endingdate);
@@ -64,9 +67,7 @@ const Post = () => {
         }
       });
     }
-    const bidIdRouter = useRouter();
-    const id = bidIdRouter.query.bid;
-    console.log(id);
+   
   };
 
   const router = useRouter();
@@ -84,25 +85,39 @@ const Post = () => {
     }
   };
 
-  const AmounToBid = (e) => {
+  const bidIdRouter = useRouter();
+  const AmounToBid = async(e) => {
     try {
-      const url = " https://biddingbackend.onrender.com/api/post/new";
-      const options = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(amountInput),
-      };
-      return fetch(url, options)
-        .then((res) => res.json())
-        .then(() => {
-          return setMessage(
-            `Your bid of ${amountInput.amount} has been successfully placed`
-          );
-        });
+      const user=localStorage.getItem("loggedInUser") 
+
+      if(!user){
+router.push("/admin/login")
+      }  else{
+        const user=localStorage.getItem("loggedInUser")
+        const jsonUser=JSON.parse(user)
+        const id = bidIdRouter.query.bid;
+        const bid={
+          username:jsonUser,
+          amount:amountInput
+    
+        }
+        singlePost && setSinglePost(prev=>({...prev,bids:[...prev.bids,bid]}))
+ const data= await fetch(`https://biddingbackend.onrender.com/api/post/${id}`,{
+  method:"PATCH",
+  body:JSON.stringify(singlePost),
+  headers: {
+    "Content-type": "application/json",
+  },
+})
+const dataJson=await data.json()
+console.log(bid)
+      }
+      
     } catch (err) {
       console.log(err);
     }
   };
+
 
   return (
     <div>
@@ -158,10 +173,10 @@ const Post = () => {
                               <div>
                                 <p style={{ color: "red" }}>{timer.days} </p>
 
-                                {console.log(
+                                {/* {console.log(
                                   new Date(item.endingdate) -
                                     new Date(item.currentdate)
-                                )}
+                                )} */}
                               </div>
                               <div>
                                 <p> Days</p>
@@ -231,10 +246,9 @@ const Post = () => {
                               type="number"
                               placeholder="Enter Amount"
                               onChange={(e) =>
-                                setAmountInput({
-                                  ...amountInput,
-                                  amount: e.target.value,
-                                })
+                                setAmountInput(
+                                  e.target.value
+                                )
                               }
                             />
                           </div>
@@ -257,7 +271,7 @@ const Post = () => {
                         </div>
                         <p style={{ color: "green" }}>{message}</p>
                         <div className="biddingpage_price_of_items_button_container_bid_now">
-                          <button onClick={(e) => AmounToBid(e)}>
+                          <button onClick={   (e) => AmounToBid(e)}>
                             Bid Now
                           </button>
                         </div>

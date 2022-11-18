@@ -39,14 +39,13 @@ const SubNav = ({ children }) => {
 
  
 const logout = () => {
-        localStorage.removeItem("user", JSON.stringify(user))
+        localStorage.removeItem("loggedInUser")
         setUser(false)
-        router.push("/")
     }
 
   return (
     <>
-    {console.log(user)}
+    {/* {console.log(user)} */}
       <div className="subnav_container">
         <div className="sub_nav_container">
           <Link href="/">

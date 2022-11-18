@@ -19,6 +19,7 @@ const Signup = () => {
     username: "",
     password: "",
     email: "",
+    phone:"",
   });
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -60,7 +61,12 @@ try{
         ...validationMessage,
         password: "Password is required",
       });
-    } else if (details.email == "") {
+    }else if(details.phone==""){
+      setValidationMessage({
+        ...validationMessage,
+        phone: "Phone number is required",
+      });
+    }else if (details.email == "") {
       setValidationMessage({
         ...validationMessage,
         email: "Email is required",
@@ -125,6 +131,19 @@ try{
                   placeholder="Username"
                   onChange={(e) =>
                     setDetails({ ...details, username: e.target.value })
+                  }
+                />
+              </div>
+
+              <div className="signup_single_inputs">
+                <div className="validation_error">
+                  <p>{details.username == "" && validationMessage.username}</p>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Phone Number"
+                  onChange={(e) =>
+                    setDetails({ ...details, phone: e.target.value })
                   }
                 />
               </div>

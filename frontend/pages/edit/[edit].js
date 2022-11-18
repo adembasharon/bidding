@@ -100,8 +100,6 @@ post.filter(item=>{
             console.log(err)
         }
     }
-
-
     const imagesUpload = async (e) => {
         const filesArr = Array.from(e.target.files);
     
