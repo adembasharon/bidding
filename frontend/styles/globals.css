@@ -285,6 +285,10 @@ footer_contact .footer_contact {
 .bid_main_container {
   width: 80%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1em;
 }
 .singleBiddingItem {
   display: flex;
@@ -293,7 +297,6 @@ footer_contact .footer_contact {
   gap: 2em;
   flex-direction: row;
   margin: 0 auto;
-  /* margin-left: ; */
 }
 .biddingpage_container {
   display: flex;
@@ -314,7 +317,6 @@ footer_contact .footer_contact {
 .bid_sub_main {
   display: flex;
   flex-direction: row;
-  /* width: 26%; */
   justify-content: space-between;
   flex-wrap: wrap;
 }
@@ -342,11 +344,11 @@ footer_contact .footer_contact {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1em;
+  gap: 2em;
   color: green;
 }
 .bid_description p {
-  width: 80%;
+  width: 60%;
   margin: 0 auto;
 }
 .bid_price button {
@@ -613,7 +615,6 @@ footer_contact .footer_contact {
 .biddingpage_price_of_items_container h2 {
   text-align: center;
   color: #0f78f0;
-  border-bottom: 1px solid black;
 }
 .biddingpage_price_of_items {
   display: flex;
@@ -977,13 +978,13 @@ footer_contact .footer_contact {
     align-items: center;
   }
 
-  .biddingpage_price_of_items_container h2 {
+  /* .biddingpage_price_of_items_container h2 {
     font-size: 0.8rem;
     width: 100%;
   }
   .biddingpage_price_of_items_container input {
-    width: 90%;
-  }
+    width: 100%;
+  } */
   .biddingpage_vehicle_properties {
     display: flex;
     align-items: center;
@@ -1044,5 +1045,38 @@ footer_contact .footer_contact {
     width: 100%;
     margin: 0 auto;
     padding: 0 auto;
+  }
+  /* [bid] */
+  .singleBiddingItem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0 auto;
+  }
+  .biddingpage_price_of_items{
+    width: 100%;
+  }
+  .biddingpage_price_of_items_container{
+display: flex;
+align-items: center;
+justify-content: flex-start;
+flex-direction: column;
+  }
+  .biddingpage_price_of_items {
+display: flex;
+gap: 1em;
+}
+  .biddingpage_price_of_items_container h2{
+width: 100%;
+
+font-size: 1rem;
+  }
+  .addminus{
+    display: none;
+  }
+  .authenticity{
+    display: none;
   }
 }

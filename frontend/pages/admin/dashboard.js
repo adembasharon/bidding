@@ -75,14 +75,14 @@ const Dashboard=()=>{
         localStorage.setItem("post", JSON.stringify(post))
 
         const deletedItem = await fetch(`https://biddingbackend.onrender.com/api/post/${id}`, {
-            method: "DELETE",
-            headers: {
-                "token": `Bearer ${currentUser[0].accessToken}`
-            }
+            method: "DELETE"
         })
-     
+        
         console.log(await deletedItem.json())
-        console.log(currentUser[0].accessToken)
+        // headers: {
+        //     "token": `Bearer ${currentUser[0].accessToken}`
+        // }
+        // console.log(currentUser[0].accessToken)
     }catch(err){
             console.log(err)
         }

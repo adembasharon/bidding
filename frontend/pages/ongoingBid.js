@@ -13,34 +13,34 @@ const OngoingBid=()=>{
     const [timer , setTimer]=useState({})
 
  
-    useEffect(()=>{
-        post.map(item=>{
-      if(item._id == bid ){
-        setInterval(()=>{
-        const startingDate=new Date()
-        const endingDate=new Date(item.endingdate)
-        const difference=endingDate-startingDate
+    // useEffect(()=>{
+    //     post.map(item=>{
+    //   if(item._id == bid ){
+    //     setInterval(()=>{
+    //     const startingDate=new Date()
+    //     const endingDate=new Date(item.endingdate)
+    //     const difference=endingDate-startingDate
         
-        console.log(difference)
+    //     console.log(difference)
       
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours=Math.floor(difference/(1000 * 60 *60)%24);
-        const minutes = Math.floor(difference / (1000 / 60)%60);
-            const seconds = Math.floor((difference / 1000)%60);
+    //     const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    //     const hours=Math.floor(difference/(1000 * 60 *60)%24);
+    //     const minutes = Math.floor(difference / (1000 / 60)%60);
+    //         const seconds = Math.floor((difference / 1000)%60);
             
        
       
-              setTimer({days,hours,minutes,seconds});
+    //           setTimer({days,hours,minutes,seconds});
           
           
-          console.log(`${days}:${hours}:${minutes}:${seconds}`)
-        },1000)
-      }
-        })
+    //       console.log(`${days}:${hours}:${minutes}:${seconds}`)
+    //     },1000)
+    //   }
+    //     })
       
       
       
-      },[])
+    //   },[])
 
 
 
@@ -66,7 +66,11 @@ const OngoingBid=()=>{
         <Nav/>
         <SubNav/>
         <div className="bid_main_container">
-          
+          {
+            post.map(item =>(
+                <div>
+                   
+           
 <div className="bid_sub_main">
 
     <div className="bidding_container">
@@ -81,23 +85,23 @@ const OngoingBid=()=>{
             
         </div>
         <div className="bid_image">
-                <img src="../images/car.png" width={170}/>
+                <img src={item.image} width={170}/>
             </div>
             <div className="bid_desc_cont bid_first_container">
                 <div className="bid_image_desc bid_description">
-                    <p>V8 car 180km/hr brand new from supermarket</p>
+                    <p>{item.description}</p>
                 </div>
                 <div className="bid_clock_icon">
                     <div>
                         <img src="../images/clock1.png" width={23}/>
                     </div>
                     <div>
-                        <p>Ends in `{}`6days,10hrs </p>
+                        <p>Ends in 6days,10hrs </p>
                     </div>
                 </div>
                 <div className="bid_price">
                     <div>
-                        <p>Highest Bid Ksh.3000</p>
+                        <p>Highest Bid Ksh.{item.startingPrice}</p>
                     </div>
                     <div>
                         <button>Bid Now</button>
@@ -105,120 +109,11 @@ const OngoingBid=()=>{
                 </div>
             </div>
     </div>
-
-    <div className="bidding_container">
-
-        <div className="bid_cont_time bid_sold">
-            <div>
-                <p>Not For Sale</p>
-            </div>
-            <div>
-                <img src="../images/love.png" width={27}/>
-            </div>
-            
-        </div>
-        <div className="bid_image">
-                <img src="../images/tv.png" width={170}/>
-            </div>
-            <div className="bid_desc_cont bid_sec_container">
-                <div className="bid_description  ">
-                    <p>32 inch Hp desktop</p>
-                </div>
-                <div className="bid_clock_icon">
-                    <div>
-                        <img src="../images/clock1.png" width={23}/>
-                    </div>
-                    <div>
-                        <p>Ends in 3days,10hrs </p>
-                    </div>
-                </div>
-                <div className="bid_price">
-                    <div>
-                        <p>Highest Bid Ksh.3000</p>
-                    </div>
-                    <div>
-                        <button>Bid Now</button>
-                    </div>
-                </div>
-            </div>
     </div>
-
-    <div className="bidding_container">
-
-        <div className="bid_cont_time">
-            <div>
-                <p>Ongoing Bid</p>
-            </div>
-            <div>
-                <img src="../images/love.png" width={27}/>
-            </div>
-            
-        </div>
-        <div className="bid_image">
-                <img src="../images/house.jpg" width={170}/>
-            </div>
-            <div className="bid_desc_cont bid_third_container">
-                <div className="bid_description  ">
-                    <p>3 Bedroom houe,+ water and electricity</p>
-                </div>
-                <div className="bid_clock_icon">
-                    <div>
-                        <img src="../images/clock1.png" width={23}/>
-                    </div>
-                    <div>
-                        <p>Ends in 3days,10hrs </p>
-                    </div>
-                </div>
-                <div className="bid_price">
-                    <div>
-                        <p>Highest Bid Ksh.3000</p>
-                    </div>
-                    <div>
-                        <button>Bid Now</button>
-                    </div>
-                </div>
-            </div>
     </div>
-
-    <div className="bidding_container">
-
-        <div className="bid_cont_time bid_sold">
-            <div>
-                <p>Not For Sale</p>
-            </div>
-            <div>
-                <img src="../images/love.png" width={27}/>
-            </div>
-            
-        </div>
-        <div className="bid_image">
-                <img src="../images/table2.png" width={170}/>
-            </div>
-            <div className="bid_desc_cont">
-                <div className="bid_description  ">
-                    <p>Japaneese Timber Table </p>
-                </div>
-                <div className="bid_clock_icon">
-                    <div>
-                        <img src="../images/clock1.png" width={23}/>
-                    </div>
-                    <div>
-                        <p>Ends in 3days,10hrs </p>
-                    </div>
-                </div>
-                <div className="bid_price">
-                    <div>
-                        <p>Highest Bid Ksh.3000</p>
-                    </div>
-                    <div>
-                        <button>Bid Now</button>
-                    </div>
-                </div>
-            </div>
-    </div>
-</div>
-
-        </div>
+         ))
+        }
+           </div>
 
         <Partners/>
         <Footer/>

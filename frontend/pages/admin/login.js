@@ -5,6 +5,7 @@ import SubNav from "../../public/components/subnav";
 import Footer from "../../public/components/footer";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Link from "next/link";
 // import GoogleProvider from "next-auth/providers/google";
 // import { getAuth, getRedirectResult, GoogleAuthProvider } from "firebase/auth";
 // import { FirebaseApp } from "../../../firebase";
@@ -168,8 +169,11 @@ const Login = () => {
               />
             </div> */}
           </div>
-          
-          <button style={{marginBottom:"2em"}} onClick={(e) => handleSubmit(e)}>Login</button>
+          <div style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
+            <div>Don't have an account? </div>
+            <div style={{color:"blue"}}><Link href="/signup">Register</Link></div>
+          </div>
+                    <button style={{marginBottom:"2em"}} onClick={(e) => handleSubmit(e)}>Login</button>
         </div>
 
         <div className="login_background_image login_second_container">

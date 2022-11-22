@@ -6,8 +6,8 @@ import Nav from "../../public/components/nav";
 import Partners from "../../public/components/partners";
 import Footer from "../../public/components/footer";
 import axios from "axios";
-import { IndeterminateCheckBox } from "@mui/icons-material";
-import { async } from "@firebase/util";
+// import { IndeterminateCheckBox } from "@mui/icons-material";
+// import { async } from "@firebase/util";
 
 const Post = () => {
   const [reload, setReload] = useState();
@@ -16,34 +16,28 @@ const Post = () => {
   const [post, setPost] = posts;
   const [timer, setTimer] = useState({});
   const [message, setMessage] = useState("");
-  const [user,setUser]=useState()
+  const [user, setUser] = useState();
   const [amountInput, setAmountInput] = useState(null);
-const [singlePost,setSinglePost]=useState(null)
-
+  const [singlePost, setSinglePost] = useState(null);
   useEffect(() => {
-    post.map((item) => {
-
-
-      if (item._id == bid) {
-        setSinglePost(item)
-        setInterval(() => {
-          const startingDate = new Date(item.currentdate);
-          const endingDate = new Date(item.endingdate);
-          const difference = endingDate - startingDate;
-
-          // console.log(difference)
-
-          const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-          const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-          const minutes = Math.floor((difference / (1000 / 60)) % 60);
-          const seconds = Math.floor((difference / 1000) % 60);
-          setTimer({ days, hours, minutes, seconds });
-
-          // console.log(`${days}:${hours}:${minutes}:${seconds}`)
-        }, 1000);
-      }
-    });
-  }, []);
+    post &&
+      post.map((item) => {
+        if (item._id == bid) {
+          console.log(item._id);
+          setSinglePost(item);
+          setInterval(() => {
+            const startingDate = new Date(item.currentdate);
+            const endingDate = new Date(item.endingdate);
+            const difference = endingDate - startingDate;
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((difference / (1000 / 60)) % 60);
+            const seconds = Math.floor((difference / 1000) % 60);
+            setTimer({ days, hours, minutes, seconds });
+          }, 1000);
+        }
+      });
+  }, [post]);
 
   useEffect(() => {
     try {
@@ -67,7 +61,6 @@ const [singlePost,setSinglePost]=useState(null)
         }
       });
     }
-   
   };
 
   const router = useRouter();
@@ -86,38 +79,59 @@ const [singlePost,setSinglePost]=useState(null)
   };
 
   const bidIdRouter = useRouter();
-  const AmounToBid = async(e) => {
+  const AmounToBid = async (e) => {
     try {
-      const user=localStorage.getItem("loggedInUser") 
+      const user = localStorage.getItem("loggedInUser");
 
-      if(!user){
-router.push("/admin/login")
-      }  else{
-        const user=localStorage.getItem("loggedInUser")
-        const jsonUser=JSON.parse(user)
+      if (!user) {
+        router.push("/admin/login");
+      } else {
+        const user = localStorage.getItem("loggedInUser");
+        const jsonUser = JSON.parse(user);
+        const date = new Date();
         const id = bidIdRouter.query.bid;
-        const bid={
-          username:jsonUser,
-          amount:amountInput
-    
-        }
-        singlePost && setSinglePost(prev=>({...prev,bids:[...prev.bids,bid]}))
- const data= await fetch(`https://biddingbackend.onrender.com/api/post/${id}`,{
-  method:"PATCH",
-  body:JSON.stringify(singlePost),
-  headers: {
-    "Content-type": "application/json",
-  },
-})
-const dataJson=await data.json()
-console.log(bid)
+        const bid = {
+          username: jsonUser,
+          amount: amountInput,
+          date: date,
+        };
+        //         const amount=amountInput.sort()
+        console.log(bid.amount);
+        setMessage(`Your bid of ${bid.amount} has been placed`);
+        singlePost &&
+          setSinglePost((prev) => ({ ...prev, bids: [...prev.bids, bid] }));
+        // console.log(singlePost && singlePost)
+
+        const data = await fetch(
+          `https://biddingbackend.onrender.com/api/post/${id}`,
+          {
+            method: "PATCH",
+            body: JSON.stringify(singlePost),
+            headers: {
+              "Content-type": "application/json",
+            },
+          }
+        );
+        const dataJson = await data.json();
       }
-      
     } catch (err) {
       console.log(err);
     }
   };
 
+  const handleHighestBid = () => {
+    const amountHolder = [];
+    singlePost &&
+      singlePost.bids.map((bid) => {
+        amountHolder.push(bid["amount"]);
+      });
+
+    amountHolder.sort((a, b) => {
+      return b - a;
+    });
+
+    return amountHolder[0];
+  };
 
   return (
     <div>
@@ -136,18 +150,6 @@ console.log(bid)
                       justifyContent: "space-between",
                     }}
                   >
-                    <div>
-                      <button
-                        style={{
-                          borderRadius: "40%",
-                          padding: "1em .3em",
-                          backgroundColor: "#8fbdf1",
-                          border: "1px solid black",
-                        }}
-                      >
-                        Owners Authenticity
-                      </button>
-                    </div>
                     <div
                       style={{
                         display: "flex",
@@ -172,11 +174,6 @@ console.log(bid)
                             <div className="biddingPage_time">
                               <div>
                                 <p style={{ color: "red" }}>{timer.days} </p>
-
-                                {/* {console.log(
-                                  new Date(item.endingdate) -
-                                    new Date(item.currentdate)
-                                )} */}
                               </div>
                               <div>
                                 <p> Days</p>
@@ -228,7 +225,7 @@ console.log(bid)
                       </div>
 
                       <div
-                        style={{ marginLeft: "7em", marginBottom: "9em" }}
+                        style={{ marginLeft: "7em" }}
                         className="biddingpage_price_of_items_container biddingpage_second_container"
                       >
                         <h2> {item.name}</h2>
@@ -240,40 +237,37 @@ console.log(bid)
                             <p>{item.startingPrice}</p>
                           </div>
                         </div>
+                        <div>
+                          <p>
+                            Current highest bid is{" "}
+                            <span style={{ color: "green" }}>
+                              {handleHighestBid()}
+                            </span>
+                          </p>
+                        </div>
                         <div className="biddingpage_price_of_items_button_container">
                           <div className="inputbtn">
                             <input
                               type="number"
                               placeholder="Enter Amount"
-                              onChange={(e) =>
-                                setAmountInput(
-                                  e.target.value
-                                )
-                              }
+                              onChange={(e) => setAmountInput(e.target.value)}
                             />
                           </div>
-                          <div>
-                            <div>
-                              <img
-                                src="../images/plus.svg"
-                                width={15}
-                                onClick={increase}
-                              />
-                            </div>
-                            <div>
-                              <img
-                                src="../images/remove.png"
-                                width={15}
-                                onClick={decrease}
-                              />
-                            </div>
+                        </div>
+                        <div>
+                          <p style={{ color: "green" }}>{message}</p>
+
+                          <div className="biddingpage_price_of_items_button_container_bid_now">
+                            <button onClick={(e) => AmounToBid(e)}>
+                              Bid Now
+                            </button>
                           </div>
                         </div>
-                        <p style={{ color: "green" }}>{message}</p>
-                        <div className="biddingpage_price_of_items_button_container_bid_now">
-                          <button onClick={   (e) => AmounToBid(e)}>
-                            Bid Now
-                          </button>
+                        <div>
+                          <div className="bidingpage_propery_heading">
+                            <h2>Description</h2>
+                            <p>{item.description}</p>
+                          </div>
                         </div>
                       </div>
 
@@ -321,10 +315,8 @@ console.log(bid)
                     </div>
                   </div>
                 </div>
-                <div className="bidingpage_propery_heading">
-                  <h2>Properties</h2>
-                </div>
-                <div className="biddingpage_vehicle_properties">
+
+                {/* <div className="biddingpage_vehicle_properties">
                   <div style={{ width: "30%" }}>
                     <h3>Description</h3>
                     <p>{item.description}</p>
@@ -341,7 +333,7 @@ console.log(bid)
                     <h3>Other Properties</h3>
                     <p>{item.cartegory}</p>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           );

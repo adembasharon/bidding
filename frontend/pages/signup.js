@@ -19,81 +19,81 @@ const Signup = () => {
     username: "",
     password: "",
     email: "",
-    phone:"",
+    phone: "",
   });
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [user, setUser] = useState({
     username: "",
-    password: ""
-})
+    password: "",
+  });
 
+  const validatePassword = () => {
+    if (confirmPassword !== "") {
+      return password === confirmPassword ? (
+        <CheckOutlinedIcon style={{ color: "green" }} />
+      ) : (
+        <ClearIcon style={{ color: "red" }} />
+      );
+    }
+  };
 
-const validatePassword = () => {
-  if (confirmPassword !== "") {
-    return password === confirmPassword ? (
-      <CheckOutlinedIcon style={{ color: "green" }} />
-    ) : (
-      <ClearIcon style={{ color: "red" }} />
-    );
-  }}
-
- useEffect(() => {
-      localStorage.setItem("user", JSON.stringify(user))
-  }, [user])
-
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
   const [showPass, setShowPass] = useState(false);
   const togglePassWardVisibility = () => {
     setShowPass(!showPass);
-  }; 
+  };
 
   const handleChange = (e) => {
     e.preventDefault();
-try{
-    if (details.username == "") {
-      setValidationMessage({
-        ...validationMessage,
-        username: "user Name is required",
-      });
-    } else if (details.password == "") {
-      setValidationMessage({
-        ...validationMessage,
-        password: "Password is required",
-      });
-    }else if(details.phone==""){
-      setValidationMessage({
-        ...validationMessage,
-        phone: "Phone number is required",
-      });
-    }else if (details.email == "") {
-      setValidationMessage({
-        ...validationMessage,
-        email: "Email is required",
-      });
-    } else {
-      const options = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(details),
-      };
-
-      fetch("https://biddingbackend.onrender.com/api/auth/register", options)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.code === 11000) {
-            return setMessage("User already registered");
-          } else {
-            setMessage("succesfully registerd you can now login");
-            return data;
-          }
-        })
-        .catch((error) => {
-          console.log(error);
+    try {
+      if (details.username == "") {
+        setValidationMessage({
+          ...validationMessage,
+          username: "user Name is required",
         });
-      console.log(details);
-    }}catch(err){
-      console.log(err)
+      } else if (details.password == "") {
+        setValidationMessage({
+          ...validationMessage,
+          password: "Password is required",
+        });
+      } else if (details.phone == "") {
+        setValidationMessage({
+          ...validationMessage,
+          phone: "Phone number is required",
+        });
+      } else if (details.email == "") {
+        setValidationMessage({
+          ...validationMessage,
+          email: "Email is required",
+        });
+      } else {
+        const options = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(details),
+        };
+
+        fetch("https://biddingbackend.onrender.com/api/auth/register", options)
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.code === 11000) {
+              return setMessage("User already registered");
+            } else {
+              setMessage("succesfully registerd you can now login");
+              return data;
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        console.log(details);
+      }
+    } catch (err) {
+      console.log(err);
     }
 
     console.log(validationMessage);
@@ -166,7 +166,7 @@ try{
                   <p>{details.password == "" && validationMessage.password}</p>
                 </div>
                 <div className="signup_icon_visibility">
-                  <div >
+                  <div>
                     <input
                       type={showPass ? "text" : "password"}
                       placeholder="Password"
@@ -183,7 +183,7 @@ try{
 
               <div className="signup_password_input">
                 <div className="signup_icon_visibility">
-                  <div >
+                  <div>
                     <input
                       type={showPass ? "text" : "password"}
                       placeholder="Confirm Password"
@@ -197,23 +197,38 @@ try{
                   </div>
                 </div>
               </div>
+              <div>{validatePassword()}</div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <div>
-                {validatePassword()}
+                <p> Already have an account?</p>
               </div>
-              
+              <div>
+                <p style={{ color: "blue" }}>
+                  <Link href="/admin/login"> Login</Link>
+                </p>
+              </div>
             </div>
             <Link href={`/dashboard/login`}>
-            <button style={{marginBottom:"2em"}} onClick={handleChange}>Signup</button>
+              <button style={{ marginBottom: "2em" }} onClick={handleChange}>
+                Signup
+              </button>
             </Link>
-          </div>
 
+       
+          </div>
           <div className="signup_background_image signup_second_container">
             <img src="../images/login.png" width={350} />
           </div>
         </div>
       </div>
       <Footer />
-
     </>
   );
 };
