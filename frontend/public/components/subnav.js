@@ -43,6 +43,12 @@ const logout = () => {
         setUser(false)
     }
 
+    const checkData=()=>{
+      if(post.cartegory== "Vehicles"){
+        router.push(`/bids/${item._id}`)
+      }
+    }
+
   return (
     <>
     {/* {console.log(user)} */}
@@ -76,7 +82,7 @@ const logout = () => {
 
                  <div style={{position:"absolute",padding:"2px",border:"1px solid rgb(230, 221, 221)",backgroundColor:"rgb(224, 204, 204)"}} className={show?"dropdown":"dropDownItem"}>
 <p onClick={logout} style={{cursor:"pointer",color:"#4990e2"}}>Logout</p>
-<Link href="/ongoingBid"><p style={{cursor:"pointer",color:"#4990e2"}}>View Bids</p></Link>
+<Link href="/admin/myDashboard"><p style={{cursor:"pointer",color:"#4990e2"}}>Dashboard</p></Link>
                  </div>
 
                 </div>               
@@ -112,7 +118,7 @@ const logout = () => {
       <div className="subNav_list_container">
         <div className="subNav_list_item">
           <div>
-            <p>Vihicles</p>
+            <p>Vehicles</p>
           </div>
           <div>
             <p>Furniture</p>

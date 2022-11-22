@@ -6,8 +6,7 @@ import Nav from "../../public/components/nav";
 import Partners from "../../public/components/partners";
 import Footer from "../../public/components/footer";
 import axios from "axios";
-// import { IndeterminateCheckBox } from "@mui/icons-material";
-// import { async } from "@firebase/util";
+
 
 const Post = () => {
   const [reload, setReload] = useState();
@@ -95,12 +94,10 @@ const Post = () => {
           amount: amountInput,
           date: date,
         };
-        //         const amount=amountInput.sort()
         console.log(bid.amount);
         setMessage(`Your bid of ${bid.amount} has been placed`);
         singlePost &&
           setSinglePost((prev) => ({ ...prev, bids: [...prev.bids, bid] }));
-        // console.log(singlePost && singlePost)
 
         const data = await fetch(
           `https://biddingbackend.onrender.com/api/post/${id}`,
@@ -133,6 +130,16 @@ const Post = () => {
     return amountHolder[0];
   };
 
+  const allBidders=()=>{
+    const bidders=[]
+    singlePost && singlePost.bids.map((bid)=>{
+      bidders.push(bid["username"])
+    });
+    console.log(bidders)
+
+   
+  }
+
   return (
     <div>
       <Nav />
@@ -141,6 +148,7 @@ const Post = () => {
         if (item._id == bid) {
           return (
             <div>
+              <button onClick={allBidders()}>Click me!</button>
               <div className="biddingpage_main_container">
                 <div className="biddingpage_main_container">
                   <div
@@ -314,26 +322,7 @@ const Post = () => {
                       </div>
                     </div>
                   </div>
-                </div>
-
-                {/* <div className="biddingpage_vehicle_properties">
-                  <div style={{ width: "30%" }}>
-                    <h3>Description</h3>
-                    <p>{item.description}</p>
-                  </div>
-                  <div>
-                    <h3>Name</h3>
-                    <p>{item.name}</p>
-                  </div>
-                  <div>
-                    <h3>Cartegory</h3>
-                    <p>{item.cartegory}</p>
-                  </div>
-                  <div>
-                    <h3>Other Properties</h3>
-                    <p>{item.cartegory}</p>
-                  </div>
-                </div> */}
+                </div>               
               </div>
             </div>
           );

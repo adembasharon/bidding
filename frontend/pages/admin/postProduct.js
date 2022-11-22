@@ -19,10 +19,18 @@ const PostProduct = () => {
     endingdate: "",
     currentdate: "",
     startingPrice: "",
+    user:""
   });
   const [imgs, setImgs] = useState([]);
   const [message,setMessage]=useState("")
   const [exist,setExist]=useState("")
+
+  useEffect(()=>{
+    const user=JSON.parse(localStorage.getItem("loggedInUser"))      
+    setFormInput(user[0]._id )
+  }, [])
+
+
   const imagesUpload = async (e) => {
     const filesArr = Array.from(e.target.files);
 
@@ -159,6 +167,7 @@ const PostProduct = () => {
       s,
     });
   };
+
 
   console.log(timer);
 
