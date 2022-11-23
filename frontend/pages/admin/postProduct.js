@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Clothing from "../../public/components/clothing";
 import Electronics from "../../public/components/electronics";
@@ -24,10 +25,12 @@ const PostProduct = () => {
   const [imgs, setImgs] = useState([]);
   const [message,setMessage]=useState("")
   const [exist,setExist]=useState("")
-
+const router=useRouter()
   useEffect(()=>{
-    const user=JSON.parse(localStorage.getItem("loggedInUser"))      
-    setFormInput(user[0]._id )
+    const user=JSON.parse(localStorage.getItem("loggedInUser")) 
+    !user && router.push("/admin/login")
+   user && setFormInput(prev=>({...prev, user:user[0]._id}) )
+
   }, [])
 
 
@@ -50,14 +53,12 @@ const PostProduct = () => {
        
             console.log(data);
             console.log(data.secure_url);
-            return setFormInput((prev) => ({
-              ...prev,
-              subimages: [...prev.subimages, data.secure_url],
-            }));            
+            return setFormInput.subimages.length < 0 && setFormInput((prev) => ({...prev,subimages: [...prev.subimages, data.secure_url]}));            
           });
       } catch (err) {
         console.log(err);
       }
+    
     });
   };
 

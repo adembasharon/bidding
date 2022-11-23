@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from "react";
+import React,{useEffect,useState,useRouter} from "react";
 import Footer from "../public/components/footer";
 import Nav from "../public/components/nav";
 import Partners from "../public/components/partners";
@@ -12,9 +12,13 @@ const MyAcount = () => {
     phone:"",
     amount:""
   })
-  
+  // const router=useRouter()
   const mpesaFunction=async()=>{
     try{
+      const user=localStorage.getItem("loggedInUser")
+      if(!user){
+        router.push("/admin/login")
+      }else{
 const response= await fetch("https://biddingbackend.onrender.com/api/stk/push",{
   method:"POST",
   headers:{
@@ -23,7 +27,7 @@ const response= await fetch("https://biddingbackend.onrender.com/api/stk/push",{
   body: JSON.stringify(mpesa)
 })
 console.log(response)
-    }catch(err){
+    }}catch(err){
       console.log(err)
     }
 } 

@@ -30,6 +30,12 @@ const Dashboard = () => {
   });
 
   const router = useRouter();
+
+  try {
+    const user =localStorage.getItem("loggedInUser")
+    if(!user){
+      router.push("/admin/login")
+    }else{
   const url = "https://biddingbackend.onrender.com/api/post/";
   useEffect(() => {
     getPosts();
@@ -49,6 +55,11 @@ const Dashboard = () => {
     localStorage.setItem("post", JSON.stringify(post));
   }, [post]);
 
+}
+    
+  } catch (err) {
+    console.log(err)
+  }
   const detail = async (id) => {
     try {
       const data = JSON.parse(localStorage.getItem("post"));
@@ -73,6 +84,7 @@ const Dashboard = () => {
       console.log(err);
     }
   };
+
   const logout = () => {
     localStorage.removeItem("user", JSON.stringify(user));
     setUser(false);
