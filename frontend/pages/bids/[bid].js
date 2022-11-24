@@ -95,10 +95,11 @@ const Post = () => {
           date: date,
         };
         console.log(bid.amount);
+
         setMessage(`Your bid of ${bid.amount} has been placed`);
         singlePost &&
           setSinglePost((prev) => ({ ...prev, bids: [...prev.bids, bid] }));
-
+console.log(bid.length)
         const data = await fetch(
           `https://biddingbackend.onrender.com/api/post/${id}`,
           {
@@ -148,7 +149,7 @@ const Post = () => {
         if (item._id == bid) {
           return (
             <div>
-              <button onClick={allBidders()}>Click me!</button>
+              {/* <button onClick={allBidders()}>Click me!</button> */}
               <div className="biddingpage_main_container">
                 <div className="biddingpage_main_container">
                   <div

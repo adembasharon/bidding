@@ -22,6 +22,8 @@ const PostProduct = () => {
     startingPrice: "",
     user:""
   });
+  const isAnonymous = true;
+  const [loading, setLoading] = useState(false)
   const [imgs, setImgs] = useState([]);
   const [message,setMessage]=useState("")
   const [exist,setExist]=useState("")
@@ -38,29 +40,46 @@ const router=useRouter()
     const filesArr = Array.from(e.target.files);
 
     const data = new FormData();
+    const imgUrl=[]
     filesArr.map(async (file) => {
       try {
         data.append("file", file);
-        console.log(data);
-
+       
+setLoading(true)
         data.append("upload_preset", "bidding");
-        await fetch("https://api.cloudinary.com/v1_1/dkpvcnel8/image/upload", {
+
+      await fetch("https://api.cloudinary.com/v1_1/dkpvcnel8/image/upload", {
           method: "POST",
           body: data,
+          
         })
+      
           .then((res) => res.json())
           .then((data) => {
-       
+            console.log(loading)
             console.log(data);
             console.log(data.secure_url);
-            return setFormInput.subimages.length < 0 && setFormInput((prev) => ({...prev,subimages: [...prev.subimages, data.secure_url]}));            
+           imgUrl.push(data.secure_url)
+            
+
+            
+            
           });
-      } catch (err) {
-        console.log(err);
-      }
-    
-    });
+          
+          console.log(imgs) 
+          
+          
+        } catch (err) {
+          console.log(err);
+        }
+        
+      });
+      setFormInput((prev) => ({...prev,subimages:imgUrl}));   
+      setLoading(false)
+  
   };
+
+ 
 
   const cartFunction = () => {
     if (formInput.cartegory === "Land") {
@@ -89,6 +108,7 @@ const router=useRouter()
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formInput),
+      
     };
     
     console.log(formInput);
@@ -184,7 +204,7 @@ const router=useRouter()
               <div className="postproduct_input_label">
                 <p>Name</p>
               </div>
-
+{console.log(loading)}
               <div className="postproduct_input_label_item">
                 <input
                   type="text"
@@ -319,9 +339,11 @@ const router=useRouter()
   <p style={{textAlign:'center' , color:"green"}}>{message}</p>
 </div>
             <div className="postproduct_btn">
-              <button onClick={(e) => submitForm(e)}>Post</button>
+              <button  onClick={(e) => submitForm(e) }>Post</button>
+      
             </div>
           </form>
+          <button onClick={()=>alert("Hello")} disabled={loading} >{loading ? "Loading ....":"Click Me"}</button>  
         </div>
       </div>
       <Partners />

@@ -6,7 +6,6 @@ import axios from "axios";
 import Nav from "../../public/components/nav";
 import SubNav from "../../public/components/subnav";
 import Footer from "../../public/components/footer";
-import { async } from "@firebase/util";
 
 const Dashboard = () => {
   const [reload, setReload] = useState();
@@ -16,7 +15,7 @@ const Dashboard = () => {
   const [currentUser, setCurrentUser] = useState([]);
   const [user, setUser] = useState();
   const [postArray, setPostArray] = useState(null);
-
+console.log(postArray)
   const [formInput, setFormInput] = useState({
     image: "",
     name: "",
@@ -97,28 +96,40 @@ const Dashboard = () => {
       if (!user) {
         router.push("/admin/login");
       } else {
-        
+        const user=localStorage.getItem("loggedInUser")
+        const jsonUser=JSON.parse(user)
         const date = new Date();
         const myPost = {
+          user:jsonUser,
           date: date,
+
         };
         postArray &&
           setPostArray((prev) => ({ ...prev, item: [...prev.item, myPost] }));
 
-        // console.log(postArray);
       }
     } catch (err) {
       console.log(err);
     }
   };
 
+  const myPosts=()=>{
+    const post=""
+    postArray && postArray.item.map((item)=>{
+      post.push(item)
+    });
+    console.log(post)
+
+   
+  }
+
   return (
     <div>
       <Nav />
       <SubNav />
       <div className="dashboard_firstButton">
+        <button onClick={myPosts()}>Click me!</button>
         <div>
-          <button onClick={newDashboard()}>Click me!</button>
           <Link href="/admin/postProduct">
             <button>Add New Bid</button>
           </Link>
