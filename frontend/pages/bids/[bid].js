@@ -78,6 +78,7 @@ const Post = () => {
   };
 
   const bidIdRouter = useRouter();
+
   const AmounToBid = async (e) => {
     try {
       const user = localStorage.getItem("loggedInUser");
@@ -94,23 +95,22 @@ const Post = () => {
           amount: amountInput,
           date: date,
         };
-        console.log(bid.amount);
 
         setMessage(`Your bid of ${bid.amount} has been placed`);
         singlePost &&
           setSinglePost((prev) => ({ ...prev, bids: [...prev.bids, bid] }));
-console.log(bid.length)
         const data = await fetch(
           `https://biddingbackend.onrender.com/api/post/${id}`,
           {
             method: "PATCH",
             body: JSON.stringify(singlePost),
             headers: {
-              "Content-type": "application/json",
+              "Content-Type": "application/json",
             },
           }
         );
         const dataJson = await data.json();
+        console.log(data)
       }
     } catch (err) {
       console.log(err);
@@ -131,15 +131,17 @@ console.log(bid.length)
     return amountHolder[0];
   };
 
-  const allBidders=()=>{
-    const bidders=[]
-    singlePost && singlePost.bids.map((bid)=>{
+  const allBidders = () => {
+    const bidders = []
+    singlePost && singlePost.bids.map((bid) => {
       bidders.push(bid["username"])
-    });
-    console.log(bidders)
-
    
+    });
+
+
   }
+  // console.log(post)
+
 
   return (
     <div>
@@ -149,7 +151,6 @@ console.log(bid.length)
         if (item._id == bid) {
           return (
             <div>
-              {/* <button onClick={allBidders()}>Click me!</button> */}
               <div className="biddingpage_main_container">
                 <div className="biddingpage_main_container">
                   <div
@@ -176,42 +177,50 @@ console.log(bid.length)
                       <div>
                         {new Date(item.endingdate) -
                           new Date(item.currentdate) <=
-                        0 ? (
+                          0 ? (
                           "This bid has ended"
                         ) : (
                           <div className="biddingPage_time_container">
                             <div className="biddingPage_time">
                               <div>
-                                <p style={{ color: "red" }}>{timer.days} </p>
+                              <p> Days</p>
+
                               </div>
                               <div>
-                                <p> Days</p>
+                              <p style={{ color: "red" }}>{timer.days} </p>
+
                               </div>
                             </div>
                             <div className="biddingPage_time">
                               <div>
-                                <p style={{ color: "red" }}>{timer.hours} </p>
+                              <p> Hrs</p>
+
                               </div>
                               <div>
-                                <p> Hrs</p>
+                              <p style={{ color: "red" }}>{timer.hours} </p>
+
                               </div>
                             </div>
 
                             <div className="biddingPage_time">
                               <div>
-                                <p style={{ color: "red" }}>{timer.minutes} </p>
+                              <p> Mins</p>
+
                               </div>
                               <div>
-                                <p> Mins</p>
+                              <p style={{ color: "red" }}>{timer.minutes} </p>
+
                               </div>
                             </div>
 
                             <div className="biddingPage_time">
                               <div>
-                                <p style={{ color: "red" }}>{timer.seconds} </p>
+                              <p> Sec</p>
+
                               </div>
                               <div>
-                                <p> Sec</p>
+                              <p style={{ color: "red" }}>{timer.seconds} </p>
+
                               </div>
                             </div>
                           </div>
@@ -287,7 +296,7 @@ console.log(bid.length)
                           </div>
                           <div>
                             <div>
-                              <p style={{ color: "yellow" }}>14</p>
+                              <p style={{ color: "yellow" }}>{item.bids.length}</p>
                             </div>
                             <p>Today's Bid</p>
                           </div>
@@ -299,7 +308,7 @@ console.log(bid.length)
                           </div>
                           <div>
                             <div>
-                              <p style={{ color: "yellow" }}>154</p>
+                              <p style={{ color: "yellow" }}>{item.bids.length}</p>
                             </div>
                             <p>Watched</p>
                           </div>
@@ -318,12 +327,13 @@ console.log(bid.length)
                         </div>
                         <div className="biddingpage_highest_bid">
                           <h5>Current Highest Bid</h5>
-                          <p>Ksh.30,321 , Ouma</p>
+                          <p> {handleHighestBid()}
+                          </p>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>               
+                </div>
               </div>
             </div>
           );
