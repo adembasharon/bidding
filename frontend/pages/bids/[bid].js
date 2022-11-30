@@ -102,7 +102,7 @@ const Post = () => {
         const data = await fetch(
           `https://biddingbackend.onrender.com/api/post/${id}`,
           {
-            method: "PATCH",
+            method: "patch",
             body: JSON.stringify(singlePost),
             headers: {
               "Content-Type": "application/json",

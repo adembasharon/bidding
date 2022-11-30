@@ -82,7 +82,7 @@ const logout = () => {
 
                  <div style={{position:"absolute",padding:"2px",border:"1px solid rgb(230, 221, 221)",backgroundColor:"rgb(224, 204, 204)"}} className={show?"dropdown":"dropDownItem"}>
 <p onClick={logout} style={{cursor:"pointer",color:"#4990e2"}}>Logout</p>
-<Link href="/admin/myDashboard"><p style={{cursor:"pointer",color:"#4990e2"}}>Dashboard</p></Link>
+<Link href="/admin/dashboard"><p style={{cursor:"pointer",color:"#4990e2"}}>Dashboard</p></Link>
                  </div>
 
                 </div>               

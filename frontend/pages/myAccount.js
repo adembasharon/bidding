@@ -12,7 +12,6 @@ const MyAcount = () => {
     phone:"",
     amount:""
   })
-  // const router=useRouter()
   const mpesaFunction=async()=>{
     try{
       const user=localStorage.getItem("loggedInUser")

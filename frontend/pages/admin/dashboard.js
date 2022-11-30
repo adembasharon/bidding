@@ -15,7 +15,6 @@ const Dashboard = () => {
   const [currentUser, setCurrentUser] = useState([]);
   const [user, setUser] = useState();
   const [postArray, setPostArray] = useState(null);
-console.log(postArray)
   const [formInput, setFormInput] = useState({
     image: "",
     name: "",
@@ -30,17 +29,23 @@ console.log(postArray)
 
   const router = useRouter();
 
+  const [availablePosts, setAvailablePosts] = useState(true)
+
   try {
-    const user =localStorage.getItem("loggedInUser")
+    const user =JSON.parse(localStorage.getItem("loggedInUser"))
     if(!user){
       router.push("/admin/login")
     }else{
-  const url = "https://biddingbackend.onrender.com/api/post/";
+  
   useEffect(() => {
     getPosts();
+       const user =JSON.parse(localStorage.getItem("loggedInUser"))
+    setUser(user)
+
   }, []);
 
-  const getPosts = () =>
+  const getPosts = () =>{
+  const url = "https://biddingbackend.onrender.com/api/post/";
     axios
       .get(url)
       .then((res) => {
@@ -48,10 +53,18 @@ console.log(postArray)
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+    };
 
   useEffect(() => {
     localStorage.setItem("post", JSON.stringify(post));
+
+    post.filter(item =>{
+
+      !item.user==user[0]._id && setAvailablePosts(true)
+      
+    })
+
   }, [post]);
 
 }
@@ -75,14 +88,13 @@ console.log(postArray)
       );
 
       console.log(await deletedItem.json());
-      // headers: {
-      //     "token": `Bearer ${currentUser[0].accessToken}`
-      // }
-      // console.log(currentUser[0].accessToken)
+     
     } catch (err) {
       console.log(err);
     }
   };
+
+
 
   const logout = () => {
     localStorage.removeItem("user", JSON.stringify(user));
@@ -90,45 +102,99 @@ console.log(postArray)
     router.push("/");
   };
 
-  const newDashboard = async () => {
-    try {
-      const user = localStorage.getItem("loggedInUser");
-      if (!user) {
-        router.push("/admin/login");
-      } else {
-        const user=localStorage.getItem("loggedInUser")
-        const jsonUser=JSON.parse(user)
-        const date = new Date();
-        const myPost = {
-          user:jsonUser,
-          date: date,
+  const renderPosts = ()=>{
+console.log(availablePosts)
+    if(availablePosts) {
 
-        };
-        postArray &&
-          setPostArray((prev) => ({ ...prev, item: [...prev.item, myPost] }));
-
-      }
-    } catch (err) {
-      console.log(err);
+      return (
+        <div>
+        {
+  
+          post !==undefined &&
+  
+          post.map((item) => {
+  
+            if(user[0]._id == item.user) {
+        
+              return (
+                <div key={item._id}>
+                  <div>
+                    <img src={item.image} width={200} />
+                  </div>
+                  <div>
+                    {item.subimages.map((src) => {
+                      return <img src={src} width={30} />;
+                    })}
+                  </div>
+                  <div className="dashboard_items">
+                    <p> 
+                      Name:<span>{item.name}</span>
+                    </p>
+                    <p>
+                      Description:
+                      <span style={{ width: "10%" }}>{item.description}</span>
+                    </p>
+                    <p>
+                      Cartegory:<span>{item.cartegory}</span>
+                    </p>
+                    <p>
+                      Starting Date:<span>{item.currentdate}</span>
+                    </p>
+                    <p>
+                      Ending Date:<span>{item.endingdate}</span>
+                    </p>
+                    <p>
+                      Starting Price:<span>{item.startingPrice}</span>
+                    </p>
+                  </div>
+        
+                  <div className="dashboard_clickButton">
+                    <div>
+                      <button
+                        onClick={() => detail(item._id)}
+                        style={{ backgroundColor: "red" }}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                    <div>
+                      <Link href={`/edit/${item._id}`}>
+                        <button>Edit</button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
+            } 
+                     
+          })       
+  
+               
+  
+        }
+        </div>
+  
+      )
+    } else {
+      return (
+        <h2>No posts yet</h2>
+        
+      )
     }
-  };
 
-  const myPosts=()=>{
-    const post=""
-    postArray && postArray.item.map((item)=>{
-      post.push(item)
-    });
-    console.log(post)
+    
+  
+    
 
-   
   }
+
+
 
   return (
     <div>
       <Nav />
       <SubNav />
       <div className="dashboard_firstButton">
-        <button onClick={myPosts()}>Click me!</button>
         <div>
           <Link href="/admin/postProduct">
             <button>Add New Bid</button>
@@ -140,59 +206,19 @@ console.log(postArray)
         </div>
       </div>
       <div className="dashboard_container">
-        {post !== undefined &&
-          post.map((item) => {
-            return (
-              <div key={item._id}>
-                <div>
-                  <img src={item.image} width={200} />
-                </div>
-                <div>
-                  {item.subimages.map((src) => {
-                    return <img src={src} width={30} />;
-                  })}
-                </div>
-                <div className="dashboard_items">
-                  <p>
-                    Name:<span>{item.name}</span>
-                  </p>
-                  <p>
-                    Description:
-                    <span style={{ width: "10%" }}>{item.description}</span>
-                  </p>
-                  <p>
-                    Cartegory:<span>{item.cartegory}</span>
-                  </p>
-                  <p>
-                    Starting Date:<span>{item.currentdate}</span>
-                  </p>
-                  <p>
-                    Ending Date:<span>{item.endingdate}</span>
-                  </p>
-                  <p>
-                    Starting Price:<span>{item.startingPrice}</span>
-                  </p>
-                </div>
 
-                <div className="dashboard_clickButton">
-                  <div>
-                    <button
-                      onClick={() => detail(item._id)}
-                      style={{ backgroundColor: "red" }}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                  <div>
-                    <Link href={`/edit/${item._id}`}>
-                      <button>Edit</button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+
+         { 
+
+renderPosts()
+         
+        }
+            
+          
+          
       </div>
+
+      
       <Footer />
     </div>
   );
