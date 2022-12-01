@@ -6,7 +6,7 @@ const Nav=()=>{
         <div className="nav_container">
           <div className="nav_Main_Container">
             <div className="nav_social_icons">
-                <div>
+                <div style={{color:"white"}}>
                     <p>Find Us On:</p>
                 </div>
                 <div className="nav_icon" style={{cursor:"pointer"}}>
@@ -32,7 +32,7 @@ const Nav=()=>{
                     <div>
                         <img src="../images/account.svg" width={12}/>
                     </div>
-                    <div style={{cursor:"pointer"}}>
+                    <div style={{cursor:"pointer",color:"white"}}>
                         <Link href="/admin/dashboard">
                        <p>My Account</p>
                        </Link>
@@ -44,7 +44,7 @@ const Nav=()=>{
                     <div>
                         <img src="../images/wish.svg" width={12}/>
                     </div>
-                    <div>
+                    <div style={{color:"white"}}>
                        <p>Wishlist</p>
                     </div>
                 </div>

@@ -29,41 +29,15 @@ const MyDashboard=()=>{
 }catch(err){
         console.log(err)
     }
-    // const allBidders=()=>{
-        // const bidders=[]
-        // singlePost && singlePost.bids.map((bid)=>{
-        //   bidders.push(bid["username"])
-        // });
-        // console.log(bid)
-
-
-// }else("You have not posted anything yet")
-    // }
-
-
-    
-    // const allBidders=()=>{
-    //     const bidders=[]
-    //     singlePost && singlePost.bids.map((bid)=>{
-    //       bidders.push(bid["username"])
-    //     });
-    //     console.log(singlePost)       
-    //   }
-
-
+   
 return(
     <div>
         {
             post.map(item=>{
                 return(
                     <p>{item.name}</p>
-                )
-            }
-                
-                )
-        }
-        {/* <button onClick={myPost()}>My Dashboard</button> */}
-        <p></p>
+                )})}
+       
     </div>
 )
 }

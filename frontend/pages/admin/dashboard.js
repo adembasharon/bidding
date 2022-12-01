@@ -6,7 +6,6 @@ import axios from "axios";
 import Nav from "../../public/components/nav";
 import SubNav from "../../public/components/subnav";
 import Footer from "../../public/components/footer";
-import { async } from "@firebase/util";
 
 const Dashboard = () => {
   const [reload, setReload] = useState();
@@ -16,7 +15,6 @@ const Dashboard = () => {
   const [currentUser, setCurrentUser] = useState([]);
   const [user, setUser] = useState();
   const [postArray, setPostArray] = useState(null);
-
   const [formInput, setFormInput] = useState({
     image: "",
     name: "",
@@ -30,12 +28,24 @@ const Dashboard = () => {
   });
 
   const router = useRouter();
-  const url = "https://biddingbackend.onrender.com/api/post/";
+
+  const [availablePosts, setAvailablePosts] = useState(false)
+
+  try {
+    const user =JSON.parse(localStorage.getItem("loggedInUser"))
+    if(!user){
+      router.push("/admin/login")
+    }else{
+  
   useEffect(() => {
     getPosts();
+       const user =JSON.parse(localStorage.getItem("loggedInUser"))
+    setUser(user)
+
   }, []);
 
-  const getPosts = () =>
+  const getPosts = () =>{
+  const url = "https://biddingbackend.onrender.com/api/post/";
     axios
       .get(url)
       .then((res) => {
@@ -43,12 +53,25 @@ const Dashboard = () => {
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+    };
 
   useEffect(() => {
     localStorage.setItem("post", JSON.stringify(post));
+
+    post.find(item =>{
+
+      item.user==user[0]._id ? setAvailablePosts(true) : setAvailablePosts(false)
+      
+    })
+
   }, [post]);
 
+}
+    
+  } catch (err) {
+    console.log(err)
+  }
   const detail = async (id) => {
     try {
       const data = JSON.parse(localStorage.getItem("post"));
@@ -65,40 +88,107 @@ const Dashboard = () => {
       );
 
       console.log(await deletedItem.json());
-      // headers: {
-      //     "token": `Bearer ${currentUser[0].accessToken}`
-      // }
-      // console.log(currentUser[0].accessToken)
+     
     } catch (err) {
       console.log(err);
     }
   };
+
+
+
   const logout = () => {
     localStorage.removeItem("user", JSON.stringify(user));
     setUser(false);
     router.push("/");
   };
 
-  const newDashboard = async () => {
-    try {
-      const user = localStorage.getItem("loggedInUser");
-      if (!user) {
-        router.push("/admin/login");
-      } else {
-        
-        const date = new Date();
-        const myPost = {
-          date: date,
-        };
-        postArray &&
-          setPostArray((prev) => ({ ...prev, item: [...prev.item, myPost] }));
+  const renderPosts = ()=>{
+console.log(availablePosts)
+    if(availablePosts) {
 
-        // console.log(postArray);
-      }
-    } catch (err) {
-      console.log(err);
+      return (
+        <div>
+        {
+  
+          post !==undefined &&
+  
+          post.map((item) => {
+  
+            if(user[0]._id == item.user) {
+        
+              return (
+                <div key={item._id}>
+                  <div>
+                    <img src={item.image} width={200} />
+                  </div>
+                  <div>
+                    {item.subimages.map((src) => {
+                      return <img src={src} width={30} />;
+                    })}
+                  </div>
+                  <div className="dashboard_items">
+                    <p> 
+                      Name:<span>{item.name}</span>
+                    </p>
+                    <p>
+                      Description:
+                      <span style={{ width: "10%" }}>{item.description}</span>
+                    </p>
+                    <p>
+                      Cartegory:<span>{item.cartegory}</span>
+                    </p>
+                    <p>
+                      Starting Date:<span>{item.currentdate}</span>
+                    </p>
+                    <p>
+                      Ending Date:<span>{item.endingdate}</span>
+                    </p>
+                    <p>
+                      Starting Price:<span>{item.startingPrice}</span>
+                    </p>
+                  </div>
+        
+                  <div className="dashboard_clickButton">
+                    <div>
+                      <button
+                        onClick={() => detail(item._id)}
+                        style={{ backgroundColor: "red" }}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                    <div>
+                      <Link href={`/edit/${item._id}`}>
+                        <button>Edit</button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
+            } 
+                     
+          })       
+  
+               
+  
+        }
+        </div>
+  
+      )
+    } else {
+      return (
+        <h2>No posts yet</h2>
+        
+      )
     }
-  };
+
+    
+  
+    
+
+  }
+
+
 
   return (
     <div>
@@ -106,7 +196,6 @@ const Dashboard = () => {
       <SubNav />
       <div className="dashboard_firstButton">
         <div>
-          <button onClick={newDashboard()}>Click me!</button>
           <Link href="/admin/postProduct">
             <button>Add New Bid</button>
           </Link>
@@ -117,59 +206,19 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="dashboard_container">
-        {post !== undefined &&
-          post.map((item) => {
-            return (
-              <div key={item._id}>
-                <div>
-                  <img src={item.image} width={200} />
-                </div>
-                <div>
-                  {item.subimages.map((src) => {
-                    return <img src={src} width={30} />;
-                  })}
-                </div>
-                <div className="dashboard_items">
-                  <p>
-                    Name:<span>{item.name}</span>
-                  </p>
-                  <p>
-                    Description:
-                    <span style={{ width: "10%" }}>{item.description}</span>
-                  </p>
-                  <p>
-                    Cartegory:<span>{item.cartegory}</span>
-                  </p>
-                  <p>
-                    Starting Date:<span>{item.currentdate}</span>
-                  </p>
-                  <p>
-                    Ending Date:<span>{item.endingdate}</span>
-                  </p>
-                  <p>
-                    Starting Price:<span>{item.startingPrice}</span>
-                  </p>
-                </div>
 
-                <div className="dashboard_clickButton">
-                  <div>
-                    <button
-                      onClick={() => detail(item._id)}
-                      style={{ backgroundColor: "red" }}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                  <div>
-                    <Link href={`/edit/${item._id}`}>
-                      <button>Edit</button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+
+         { 
+
+renderPosts()
+         
+        }
+            
+          
+          
       </div>
+
+      
       <Footer />
     </div>
   );

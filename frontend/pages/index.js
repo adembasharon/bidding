@@ -12,8 +12,8 @@ export default function Home() {
     <div className={styles.container}>
       <Head>
         <title>BidNunua</title>
-         <link href="https://fonts.googleapis.com/css2?family=Edu+TAS+Beginner&family=Merriweather:wght@300&display=swap" rel="stylesheet"/>
-
+         {/* <link href="https://fonts.googleapis.com/css2?family=Edu+TAS+Beginner&family=Merriweather:wght@300&display=swap" rel="stylesheet"/> */}
+         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet"/> 
           </Head> 
               
                <Nav/> 
