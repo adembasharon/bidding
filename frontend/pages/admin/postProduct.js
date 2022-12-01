@@ -27,7 +27,7 @@ const PostProduct = () => {
 
   useEffect(()=>{
     const user=JSON.parse(localStorage.getItem("loggedInUser"))      
-    setFormInput(user[0]._id )
+    user && setFormInput(user[0]._id )
   }, [])
 
 
