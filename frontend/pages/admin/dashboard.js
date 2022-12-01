@@ -29,7 +29,7 @@ const Dashboard = () => {
 
   const router = useRouter();
 
-  const [availablePosts, setAvailablePosts] = useState(true)
+  const [availablePosts, setAvailablePosts] = useState(false)
 
   try {
     const user =JSON.parse(localStorage.getItem("loggedInUser"))
@@ -59,9 +59,9 @@ const Dashboard = () => {
   useEffect(() => {
     localStorage.setItem("post", JSON.stringify(post));
 
-    post.filter(item =>{
+    post.find(item =>{
 
-      !item.user==user[0]._id && setAvailablePosts(true)
+      item.user==user[0]._id ? setAvailablePosts(true) : setAvailablePosts(false)
       
     })
 
