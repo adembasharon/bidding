@@ -23,17 +23,32 @@ const Post = () => {
       post.map((item) => {
         if (item._id == bid) {
           console.log(item._id);
+          console.log(item.bids)
           setSinglePost(item);
-          setInterval(() => {
-            const startingDate = new Date(item.currentdate);
+          // setInterval(() => {
+          const updateCountDown = () => {
+
+            const startingDate = new Date();
             const endingDate = new Date(item.endingdate);
             const difference = endingDate - startingDate;
-            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-            const minutes = Math.floor((difference / (1000 / 60)) % 60);
-            const seconds = Math.floor((difference / 1000) % 60);
+            console.log(difference)
+            const days = Math.floor(difference / 1000 / 60 / 60 / 24);
+            const hours = Math.floor(difference / 1000 / 60 / 60) % 24;
+            const minutes = Math.floor(difference / 1000 / 60) % 60;
+            const seconds = Math.floor(difference / 1000) % 60;
+
+            // console.log( `${days}:${hours}:${minutes}:${seconds}` );
             setTimer({ days, hours, minutes, seconds });
-          }, 1000);
+
+
+          }
+
+          setInterval(() => {
+            updateCountDown()
+          }, 1000)
+
+
+          // }, 1000);
         }
       });
   }, [post]);
@@ -135,20 +150,22 @@ const Post = () => {
     const bidders = []
     singlePost && singlePost.bids.map((bid) => {
       bidders.push(bid["username"])
-   
+
     });
 
 
   }
+  // let ourCurrentDate = new Date()
   // console.log(post)
 
 
   return (
-    <div>
+    <div style={{ fontFamily: "Josefin Sans, sans-serif " }}>
       <Nav />
       <SubNav />
       {post.map((item) => {
         if (item._id == bid) {
+
           return (
             <div>
               <div className="biddingpage_main_container">
@@ -175,56 +192,65 @@ const Post = () => {
                       </div>
 
                       <div>
-                        {new Date(item.endingdate) -
-                          new Date(item.currentdate) <=
-                          0 ? (
-                          "This bid has ended"
-                        ) : (
-                          <div className="biddingPage_time_container">
-                            <div className="biddingPage_time">
-                              <div>
-                              <p> Days</p>
 
-                              </div>
-                              <div>
-                              <p style={{ color: "red" }}>{timer.days} </p>
+                        {
 
-                              </div>
-                            </div>
-                            <div className="biddingPage_time">
-                              <div>
-                              <p> Hrs</p>
+                          // new Date(item.currentDate) > new Date() ? (
+                          //   // "Starting Soon"
+                          //   console.log(new Date(item.currentDate) - new Date())
+                          // )
+                          //   :
+                            new Date(item.endingdate) -
+                              new Date(item.currentdate) <=
+                              0 ? (
+                              "This bid has ended"
+                            ) :
+                              (
+                                <div className="biddingPage_time_container">
+                                  <div className="biddingPage_time">
+                                    <div>
+                                      <p> Days</p>
 
-                              </div>
-                              <div>
-                              <p style={{ color: "red" }}>{timer.hours} </p>
+                                    </div>
+                                    <div>
+                                      <p style={{ color: "red" }}>{timer.days} </p>
 
-                              </div>
-                            </div>
+                                    </div>
+                                  </div>
+                                  <div className="biddingPage_time">
+                                    <div>
+                                      <p> Hrs</p>
 
-                            <div className="biddingPage_time">
-                              <div>
-                              <p> Mins</p>
+                                    </div>
+                                    <div>
+                                      <p style={{ color: "red" }}>{timer.hours} </p>
 
-                              </div>
-                              <div>
-                              <p style={{ color: "red" }}>{timer.minutes} </p>
+                                    </div>
+                                  </div>
 
-                              </div>
-                            </div>
+                                  <div className="biddingPage_time">
+                                    <div>
+                                      <p> Mins</p>
 
-                            <div className="biddingPage_time">
-                              <div>
-                              <p> Sec</p>
+                                    </div>
+                                    <div>
+                                      <p style={{ color: "red" }}>{timer.minutes} </p>
 
-                              </div>
-                              <div>
-                              <p style={{ color: "red" }}>{timer.seconds} </p>
+                                    </div>
+                                  </div>
 
-                              </div>
-                            </div>
-                          </div>
-                        )}
+                                  <div className="biddingPage_time">
+                                    <div>
+                                      <p> Sec</p>
+
+                                    </div>
+                                    <div>
+                                      <p style={{ color: "red" }}>{timer.seconds} </p>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
                       </div>
                     </div>
                   </div>

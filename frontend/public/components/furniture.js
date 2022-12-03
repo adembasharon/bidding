@@ -1,7 +1,7 @@
 import React from "react";
 const Furniture = () => {
   return (
-    <div>
+    <div style={{fontFamily: "Josefin Sans, sans-serif "}}>
     <div className="land_container">    
         <div>
           <h4>Cartegory</h4>

@@ -7,7 +7,7 @@ import Partners from "../public/components/partners";
 
 const FAQ=()=>{
     return(
-        <>
+        <div style={{fontFamily: "Josefin Sans, sans-serif "}}>
         <Nav />
         <SubNav/>
         <div className="faq_main_items">
@@ -58,7 +58,7 @@ Anyone who has an item to sell can participate on our platform.
         </div>
         <Partners/>
 <Footer/>      
-        </>
+        </div>
     )
 }
 export default FAQ

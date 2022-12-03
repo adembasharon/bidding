@@ -173,7 +173,7 @@ post.filter(item=>{
 
 
 return(
-    <>
+    <div style={{fontFamily: "Josefin Sans, sans-serif "}}>
     <Nav/>
     <SubNav/>
         <div className="edit_container">
@@ -241,7 +241,7 @@ return <img  src={src} width={30} />
 })}
         </div>
         <Footer/>
-        </>
+        </div>
     )
     
 }

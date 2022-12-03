@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer=()=>{
     return(
-<div className="footerContainer">
+<div className="footerContainer" style={{fontFamily: "Josefin Sans, sans-serif "}}>
 <div className="footerMainContainer">
     <div className="footerContent">
 <div className="footerContainer1">

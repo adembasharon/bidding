@@ -100,7 +100,7 @@ const Signup = () => {
   };
 
   return (
-    <>
+    <div style={{fontFamily: "Josefin Sans, sans-serif "}}>
       <Nav />
       <SubNav />
       <div className="signup_main_container">
@@ -229,7 +229,7 @@ const Signup = () => {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 export default Signup;

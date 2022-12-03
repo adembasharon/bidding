@@ -36,7 +36,7 @@ const Vehicle = () => {
 
   console.log(carBrands);
   return (
-    <div style={{width:"80%",margin:"0 auto",}}>
+    <div style={{width:"80%",margin:"0 auto",fontFamily: "Josefin Sans, sans-serif "}}>
       <div style={{display:"flex",flaexDirection:"row",backgroundColor:"#4990E2", gap:".5em",width:"100%",padding:"2em"}}>
       <div>
         <select>

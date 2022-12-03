@@ -94,7 +94,7 @@ const Login = () => {
 
 
   return (
-    <>
+  <div style={{fontFamily: "Josefin Sans, sans-serif "}}>
 
     <Nav/>
     <SubNav/>
@@ -119,12 +119,13 @@ const Login = () => {
 
           <div className="login_google" >
             <div>
-              <img src="../images/google.png" width={27} />
+              <img style={{marginLeft:".3em"}} src="../images/google.png" width={27} />
             </div>
             <div>
               <p>Login with Google</p>
             </div>
           </div>
+          <div style={{textAlign:"center",marginTop:".3em"}}>or</div>
         
           <div >
           <div className="validation_error">
@@ -154,7 +155,7 @@ const Login = () => {
                       }
                     />
                   </div>
-                  <div onClick={togglePassWardVisibility}>
+                  <div onClick={togglePassWardVisibility} width={20}>
                     {showPass ? <VisibilityIcon /> : <VisibilityOffIcon />}
                   </div>
                 </div>
@@ -182,7 +183,7 @@ const Login = () => {
       </div>
     </div>
     <Footer/>
-    </>
+    </div>
   );
 };
 export default Login;

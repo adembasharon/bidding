@@ -29,7 +29,7 @@ const Dashboard = () => {
 
   const router = useRouter();
 
-  const [availablePosts, setAvailablePosts] = useState(true)
+  const [availablePosts, setAvailablePosts] = useState(false)
 
   try {
     const user =JSON.parse(localStorage.getItem("loggedInUser"))
@@ -59,9 +59,9 @@ const Dashboard = () => {
   useEffect(() => {
     localStorage.setItem("post", JSON.stringify(post));
 
-    post.filter(item =>{
-
-      !item.user==user[0]._id && setAvailablePosts(true)
+    post.find(item =>{
+console.log(item.bids)
+      item.user==user[0]._id ? setAvailablePosts(true) : setAvailablePosts(false)
       
     })
 
@@ -107,7 +107,7 @@ console.log(availablePosts)
     if(availablePosts) {
 
       return (
-        <div>
+        <div style={{display:"flex",flexDirection:"row",gap:".3em",fontFamily: "Josefin Sans, sans-serif "}}>
         {
   
           post !==undefined &&
@@ -117,7 +117,7 @@ console.log(availablePosts)
             if(user[0]._id == item.user) {
         
               return (
-                <div key={item._id}>
+                <div key={item._id} >
                   <div>
                     <img src={item.image} width={200} />
                   </div>
@@ -146,6 +146,16 @@ console.log(availablePosts)
                     <p>
                       Starting Price:<span>{item.startingPrice}</span>
                     </p>
+                  </div>
+                  <div>
+                    {
+item.bids.map((bid)=>{
+  return(
+    <p>{bid.username}</p>
+  )
+})
+
+                    }
                   </div>
         
                   <div className="dashboard_clickButton">

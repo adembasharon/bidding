@@ -1,7 +1,7 @@
 import React from "react";
 const Land = () => {
   return (
-    <div>
+    <div style={{fontFamily: "Josefin Sans, sans-serif "}}>
     <div className="land_container">    
       <div>
         <input type="size" placeholder="Size" />

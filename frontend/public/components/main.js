@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 const Main = () => {
   return (
-    <div className="main_container">
+    <div className="main_container" style={{fontFamily: "Josefin Sans, sans-serif "}}>
      
       <div className="main_haeding">
         <div>

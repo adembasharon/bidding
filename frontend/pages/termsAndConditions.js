@@ -6,7 +6,7 @@ import SubNav from "../public/components/subnav";
 
 const Terms_And_Condition=()=>{
     return(
-        <>   
+        <div style={{fontFamily: "Josefin Sans, sans-serif "}}>   
         <Nav/>
         <SubNav/>
              <div className="Terms_main_cont">
@@ -28,7 +28,8 @@ You are All Welcome to Bidnunua to enjoy the power and the fun of a Public Aucti
         </div>
         <Partners/>
         <Footer/>
-        </>
+        </div>
+        
 
     )
 }

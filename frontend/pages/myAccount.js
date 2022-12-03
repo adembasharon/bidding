@@ -18,7 +18,7 @@ const MyAcount = () => {
       if(!user){
         router.push("/admin/login")
       }else{
-const response= await fetch("https://biddingbackend.onrender.com/api/stk/push",{
+const response= await fetch("https://bus-lite-mpesa.onrender.com/api/stk/push",{
   method:"POST",
   headers:{
     "Content-Type":"application/json"
@@ -36,7 +36,7 @@ console.log(response)
 
   return (
     
-    <>
+    < div style={{fontFamily: "Josefin Sans, sans-serif "}}>
       <Nav />
       <SubNav />
       <div className="myaccount_main_container">
@@ -196,7 +196,7 @@ console.log(response)
       </div>
       <Partners />
       <Footer />
-    </>
+    </div>
   );
 };
 export default MyAcount;

@@ -2,7 +2,7 @@ import React from "react";
 
 const Partners=()=>{
     return(
-        <div>
+        <div style={{fontFamily: "Josefin Sans, sans-serif "}}>
 
 
 <div className="hero_bank_container">

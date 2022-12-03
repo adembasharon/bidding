@@ -62,7 +62,7 @@ const OngoingBid=()=>{
     
     },[])    
     return(
-        <>
+        <div style={{fontFamily: "Josefin Sans, sans-serif "}}>
         <Nav/>
         <SubNav/>
         <div className="bid_main_container">
@@ -117,7 +117,7 @@ const OngoingBid=()=>{
 
         <Partners/>
         <Footer/>
-       </>
+       </div>
     )
 }
 export default OngoingBid

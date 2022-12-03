@@ -3,13 +3,18 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios"
 import Partners from "./partners";
 import { BidContext } from "../../state";
+import { useRouter } from 'next/router'
+
 
 const Hero = () => {
 
     const biddingContext = useContext(BidContext)
-    const { posts } = biddingContext
+    const { posts } = biddingContext;
     const [post, setPost] = posts
     console.log(post)
+const {cartegory}=biddingContext;
+    const [cartegories, setCartegories] = cartegory;
+
 
     try {
         const url = ' https://biddingbackend.onrender.com/api/post/'
@@ -31,10 +36,17 @@ const Hero = () => {
     } catch (err) {
         console.log(err)
     }
+    const router=useRouter();
 
+    const getCartegory = (e) => {
+        e.preventDefault();
+        setCartegories(e.target.innerText)
+        router.push("../../filterPage")
+      }
+      console.log(cartegories)
 
     return (
-        <div className="hero_container">
+        <div className="hero_container" style={{fontFamily: "Josefin Sans, sans-serif "}}>
 
 
 
@@ -51,7 +63,7 @@ const Hero = () => {
                                 <img src="../images/laptop.png" width={150} />
                             </div>
                             <div>
-                                <p>Electronics</p>
+                                <p style={{cursor:"pointer"}} onClick={e => getCartegory(e)}>Electronics</p>
                             </div>
                         </div>
 
@@ -60,7 +72,7 @@ const Hero = () => {
                                 <img src="../images/chair.png" width={150} />
                             </div>
                             <div>
-                                <p>Furniture</p>
+                                <p style={{cursor:"pointer"}} onClick={e => getCartegory(e)}>Furniture</p>
                             </div>
                         </div>
 
@@ -69,7 +81,7 @@ const Hero = () => {
                                 <img src="../images/jacket.png" width={150} />
                             </div>
                             <div>
-                                <p>Cloths</p>
+                                <p style={{cursor:"pointer"}} onClick={e => getCartegory(e)}>Cloths</p>
                             </div>
                         </div>
 
@@ -78,7 +90,7 @@ const Hero = () => {
                                 <img src="../images/vehicle.png" width={150} />
                             </div>
                             <div>
-                                <p>Vehicle</p>
+                                <p style={{cursor:"pointer"}} onClick={e => getCartegory(e)}>Vehicle</p>
                             </div>
                         </div>
 
@@ -106,7 +118,7 @@ const Hero = () => {
                                     </div>
                                     <div>
                                         <Link href={`/bids/${item._id}`}>
-                                            <button>View Bid</button>
+                                            <button>View Product</button>
                                         </Link>
                                     </div>
                                 </div>

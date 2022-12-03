@@ -3,7 +3,7 @@ import React from "react"
 
 const Nav=()=>{
     return(
-        <div className="nav_container">
+        <div className="nav_container" style={{fontFamily: "Josefin Sans, sans-serif "}}>
           <div className="nav_Main_Container">
             <div className="nav_social_icons">
                 <div style={{color:"white"}}>

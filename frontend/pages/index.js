@@ -11,9 +11,11 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>BidNunua</title>
-         {/* <link href="https://fonts.googleapis.com/css2?family=Edu+TAS+Beginner&family=Merriweather:wght@300&display=swap" rel="stylesheet"/> */}
-         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet"/> 
+        <title>BID n' BUY</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;1,600&display=swap" rel="stylesheet"/>
+          
           </Head> 
               
                <Nav/> 

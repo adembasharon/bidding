@@ -179,7 +179,7 @@ setLoading(true)
     const d = days;
     const h = hours - days * 24;
     const m = minutes - hours * 60;
-    const s = -minutes * 60;
+    const s = minutes * 60;
     seconds;
     setTimer({
       d,
@@ -193,7 +193,7 @@ setLoading(true)
   console.log(timer);
 
   return (
-    <>
+    <div style={{fontFamily: "Josefin Sans, sans-serif "}}>
       <Nav />
       <SubNav />
       <div className="postproduct_main_container">
@@ -348,7 +348,7 @@ setLoading(true)
       </div>
       <Partners />
       <Footer />
-    </>
+    </div>
   );
 };
 export default PostProduct;
