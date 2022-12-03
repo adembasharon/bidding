@@ -12,26 +12,6 @@ const SubNav = ({ children }) => {
   const [user,setUser]=useState(null)
   const [show , setShow]=useState(false)
 
-  const customSearchClient = {
-    search(requests) {
-      return fetch("https://biddingbackend.onrender.com/api/search", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ requests }),
-      }).then((res) => res.json());
-    },
-    searchForFacetValues(requests) {
-      return fetch("https://biddingbackend.onrender.com/api/sffv", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ requests }),
-      }).then((res) => res.json());
-    },
-  };
   useEffect(()=>{
     const user = localStorage.getItem("loggedInUser")
     setUser(JSON.parse(user))
@@ -64,14 +44,7 @@ const logout = () => {
           </Link>
           <div className="subNav_input">          
             <div>            
-              <InstantSearch
-                searchClient={customSearchClient}
-                indexName="dev_bidders"
-              >
-                <SearchBox />
-                {children}
-              </InstantSearch>
-            </div>
+                          </div>
           </div>
           <div className="subnav_login">
               {
