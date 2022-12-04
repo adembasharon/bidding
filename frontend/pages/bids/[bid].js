@@ -112,20 +112,19 @@ const Post = () => {
         };
 
         setMessage(`Your bid of ${bid.amount} has been placed`);
-        singlePost &&
           setSinglePost((prev) => ({ ...prev, bids: [...prev.bids, bid] }));
         const data = await fetch(
           `https://biddingbackend.onrender.com/api/post/${id}`,
           {
-            method: "patch",
-            body: JSON.stringify(singlePost),
+            method: "PATCH",
+            body: JSON.stringify({bids:[...singlePost.bids, bid]}),
             headers: {
               "Content-Type": "application/json",
             },
           }
         );
         const dataJson = await data.json();
-        console.log(data)
+        console.log(dataJson)
       }
     } catch (err) {
       console.log(err);

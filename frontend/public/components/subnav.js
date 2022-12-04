@@ -39,7 +39,8 @@ const SubNav = ({ children }) => {
       }).then((res) => res.json());
     },
   };
-  useEffect(() => {
+  // useEffect(() => {
+  useEffect(()=>{
     const user = localStorage.getItem("loggedInUser")
     setUser(JSON.parse(user))
   }, [])
@@ -66,10 +67,13 @@ const SubNav = ({ children }) => {
               <img src="../images/logo.png" width={90} />
             </div>
           </Link>
-
-          <div>
-            <h2>Bid And Buy</h2>
+          <div style={{cursor:"pointer"}}>
+          <Link href="/">
+          <h2>Bid And Buy</h2>
+          </Link>
           </div>
+
+          <div>    
 
           <div className="subnav_login">
             {
@@ -140,6 +144,7 @@ const SubNav = ({ children }) => {
           
         </div>
       </div>
+    </div>
     </div>
   );
 };

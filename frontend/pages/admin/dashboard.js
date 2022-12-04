@@ -6,6 +6,7 @@ import axios from "axios";
 import Nav from "../../public/components/nav";
 import SubNav from "../../public/components/subnav";
 import Footer from "../../public/components/footer";
+import 'bootstrap/dist/css/bootstrap.css';
 
 const Dashboard = () => {
   const [reload, setReload] = useState();
@@ -28,6 +29,9 @@ const Dashboard = () => {
   });
 
   const router = useRouter();
+  useEffect(()=>{
+    import("bootstrap/dist/js/bootstrap");
+  },[])
 
   const [availablePosts, setAvailablePosts] = useState(false)
 
@@ -127,6 +131,7 @@ console.log(availablePosts)
                     })}
                   </div>
                   <div className="dashboard_items">
+                    {console.log(item)}
                     <p> 
                       Name:<span>{item.name}</span>
                     </p>
@@ -146,17 +151,44 @@ console.log(availablePosts)
                     <p>
                       Starting Price:<span>{item.startingPrice}</span>
                     </p>
+                    <p>
+                      Total bids:<span>{item.bids.length}</span>
+                    </p>
                   </div>
-                  <div>
-                    {
-item.bids.map((bid)=>{
-  return(
-    <p>{bid.username}</p>
-  )
-})
+              
 
-                    }
-                  </div>
+                  <button type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+  View bidders
+</button>
+
+<div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div className="modal-dialog">
+    <div className="modal-content">
+      <div className="modal-header">
+        <h1 className="modal-title fs-5" id="exampleModalLabel">All bidders</h1>
+        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div className="modal-body">
+           <div>
+
+        {
+                      
+                  item._id &&  item.bids.map((bid)=>{
+                        return(
+                          <p>Username  <span style={{color:"green"}}>{bid.username[0].username}</span>,  Amount  <span style={{color:"green"}}>{bid.amount}</span>,   PhoneNumber  <span style={{color:"green"}}>{bid.phone}</span></p>,
+                          // <p>Amount  {bid.amount}  </p>,
+                          // <p>console.log({bid.username[0].username})</p>
+                        )
+                      })}
+        </div>
+
+      </div>
+      <div className="modal-footer">
+        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+             </div>
+    </div>
+  </div>
+</div>
         
                   <div className="dashboard_clickButton">
                     <div>

@@ -6,7 +6,7 @@ import SubNav from "../public/components/subnav";
 import Link from "next/link";
 import axios from "axios"
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap.css';
 const MyAcount = () => {
   const [mpesa,setMpesa]=useState({
     phone:"",
